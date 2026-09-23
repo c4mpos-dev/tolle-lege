@@ -1,0 +1,2 @@
+/* Limita o scan de classes ao src/ (evita varrer public/models/*.glb) */
+@import 'tailwindcss' source('../');
