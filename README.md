@@ -5,8 +5,25 @@ Site de introdução à fé cristã católica.
 ## Stack
 
 - [React](https://react.dev) + [Vite](https://vite.dev) + TypeScript
-- [Tailwind CSS v4](https://tailwindcss.com)
+- [Tailwind CSS v4](https://tailwindcss.com) com tokens de design em `src/styles/index.css`
+- [React Router](https://reactrouter.com) (rotas em inglês, páginas carregadas sob demanda)
+- [TanStack Query](https://tanstack.com/query) + [axios](https://axios-http.com) para dados remotos
+- [Motion](https://motion.dev) para animações (respeita "reduzir movimento")
 - [React Three Fiber](https://r3f.docs.pmnd.rs) + [drei](https://drei.docs.pmnd.rs) para o modelo 3D
+
+## Rotas
+
+| Rota                | Página                                              |
+| ------------------- | --------------------------------------------------- |
+| `/`                 | Início                                              |
+| `/trails`           | Trilhas por perfil                                  |
+| `/trails/:trailId`  | Passos de uma trilha (progresso salvo no navegador) |
+| `/mass`             | Como funciona a Missa                               |
+| `/liturgy`          | Liturgia diária                                     |
+| `/faq`              | Dúvidas                                             |
+| `/curiosities`      | Curiosidades                                        |
+
+Em produção, configure o servidor para redirecionar rotas desconhecidas para `index.html` (SPA).
 
 ## Scripts
 
@@ -24,14 +41,23 @@ npm run lint     # oxlint
 public/
   models/                 # arquivos 3D (.glb) servidos estaticamente
 src/
-  app/                    # componente raiz e composição da aplicação
+  app/                    # App (providers) e definição das rotas
+  config/                 # constantes globais (rotas, navegação)
   components/             # componentes reutilizáveis entre features
+    layout/               # Header, Footer, PageHeader, 404…
+    ui/                   # peças visuais base (vitral, rosácea, Reveal, ButtonLink…)
     three/                # utilitários genéricos de cena 3D
-  features/               # módulos por domínio (cada um expõe um index.ts)
-    church/               # visualizador 3D da Igreja Matriz
-    home/                 # seções da página inicial (hero, …)
-  styles/                 # CSS global (entrada do Tailwind)
+  features/               # módulos por domínio; cada um expõe um index.ts
+    <feature>/
+      pages/              # páginas ligadas a rotas
+      components/         # componentes da feature
+      hooks/ api/ utils/  # quando necessário
+      data.ts             # conteúdo estático da feature
+  lib/                    # infraestrutura compartilhada (cliente HTTP, texto…)
+  styles/                 # CSS global e tokens de design
   main.tsx                # ponto de entrada
 ```
 
-Imports internos usam o alias `@/` → `src/`.
+Features: `home`, `trails`, `mass`, `liturgy`, `faq`, `curiosities` e `church` (visualizador 3D).
+
+Imports internos usam o alias `@/` → `src/`. Uma feature só importa outra pelo seu `index.ts`.
