@@ -1,2 +1,85 @@
 /* Limita o scan de classes ao src/ (evita varrer public/models/*.glb) */
 @import 'tailwindcss' source('../');
+
+/* Fontes self-hosted. Fraunces com o eixo SOFT (serifas arredondadas). */
+@import '@fontsource-variable/fraunces/soft.css';
+@import '@fontsource-variable/fraunces/soft-italic.css';
+@import '@fontsource-variable/inter';
+
+/*
+ * Tokens de design — conceito "igreja caiada ao sol da manhã".
+ * Nomes semânticos: ao trocar de design system, só os valores mudam.
+ * Regra de proporção: ~80% canvas/surface, ~15% ink, ~5% cor.
+ */
+@theme {
+  /* Neutros */
+  --color-canvas: #fbf8f3; /* cal — fundo geral */
+  --color-surface: #f3eee6; /* linho — seções alternadas */
+  --color-line: #e6ddd0; /* bordas e divisores */
+  --color-ink: #2b2622; /* texto principal */
+  --color-ink-muted: #6b625a; /* texto secundário */
+
+  /* Primária: ouro envelhecido. Use -strong para texto (contraste AA). */
+  --color-primary: #b08d57;
+  --color-primary-strong: #8a6a35;
+  --color-primary-soft: #f3eadb;
+
+  /* Acentos por área */
+  --color-marian: #4a6b94; /* dúvidas */
+  --color-marian-soft: #e3eaf3;
+  --color-terracotta: #c9725b; /* curiosidades */
+  --color-terracotta-soft: #f6e4de;
+  --color-sage: #5f7f63; /* primeiros passos */
+  --color-sage-soft: #e5ede4;
+
+  /* Tipografia */
+  --font-serif: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-serif--font-variation-settings: 'SOFT' 50;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Animações */
+  --animate-glass: glass 7s ease-in-out infinite;
+  --animate-rays: rays 9s ease-in-out infinite;
+
+  /* Luz atravessando o vitral */
+  @keyframes glass {
+    0%,
+    100% {
+      opacity: 0.72;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Raios de sol pela janela */
+  @keyframes rays {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary-soft text-ink;
+  }
+}
