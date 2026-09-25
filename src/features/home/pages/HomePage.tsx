@@ -7,6 +7,7 @@ import { FaqList, faqItems } from '@/features/faq'
 import { LiturgyTodayCard } from '@/features/liturgy'
 import { TrailGrid } from '@/features/trails'
 import { ClosingCta } from '../components/ClosingCta'
+import { ExploreSection } from '../components/ExploreSection'
 import { Hero } from '../components/Hero'
 import { MassPreview } from '../components/MassPreview'
 
@@ -38,8 +39,10 @@ export function HomePage() {
 
       <MassPreview />
 
+      <ExploreSection />
+
       {/* Liturgia de hoje */}
-      <section className="py-24 sm:py-32">
+      <section className="border-t border-line py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:px-10">
           <Reveal>
             <SectionHeader
