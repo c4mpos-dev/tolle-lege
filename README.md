@@ -22,6 +22,11 @@ Site de introdução à fé cristã católica.
 | `/liturgy`          | Liturgia diária                                     |
 | `/faq`              | Dúvidas                                             |
 | `/curiosities`      | Curiosidades                                        |
+| `/prayers`          | Orações essenciais e terço guiado                   |
+| `/sacraments`       | Os sete sacramentos                                 |
+| `/liturgical-year`  | Ano litúrgico (calculado a partir da Páscoa)        |
+| `/confession`       | Guia da Confissão e exame de consciência            |
+| `/glossary`         | Glossário da fé                                     |
 
 Em produção, configure o servidor para redirecionar rotas desconhecidas para `index.html` (SPA).
 
@@ -58,6 +63,9 @@ src/
   main.tsx                # ponto de entrada
 ```
 
-Features: `home`, `trails`, `mass`, `liturgy`, `faq`, `curiosities` e `church` (visualizador 3D).
+Features: `home`, `trails`, `mass`, `liturgy`, `faq`, `curiosities`, `prayers`, `sacraments`,
+`liturgical-year`, `confession`, `glossary` e `church` (visualizador 3D).
+
+A navegação (menu e rodapé) é gerada a partir de `navGroups` em `src/config/routes.ts`.
 
 Imports internos usam o alias `@/` → `src/`. Uma feature só importa outra pelo seu `index.ts`.
