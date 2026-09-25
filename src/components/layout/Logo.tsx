@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { Rosette } from '@/components/ui/Rosette'
+import { LogoMark } from '@/components/ui/LogoMark'
 import { routes } from '@/config/routes'
 
 export function Logo({ className = '', onClick }: { className?: string; onClick?: () => void }) {
@@ -7,9 +7,10 @@ export function Logo({ className = '', onClick }: { className?: string; onClick?
     <Link
       to={routes.home}
       onClick={onClick}
-      className={`group inline-flex items-center gap-2 font-serif text-xl font-medium tracking-tight ${className}`}
+      aria-label="Tolle Lege, página inicial"
+      className={`group inline-flex items-center gap-2.5 font-serif text-xl font-medium tracking-tight ${className}`}
     >
-      <Rosette className="size-6 text-primary transition-transform duration-500 group-hover:rotate-45" />
+      <LogoMark className="size-8 transition-transform duration-500 [--logo-accent:var(--color-primary)] group-hover:-translate-y-0.5" />
       Tolle Lege
     </Link>
   )
