@@ -1,3 +1,4 @@
+import { Plus } from 'lucide-react'
 import { motion, useScroll, useSpring } from 'motion/react'
 import { useRef } from 'react'
 import { Reveal } from '@/components/ui/Reveal'
@@ -40,7 +41,7 @@ export function MassTimeline() {
                 <Reveal as="li" key={moment.title} className="relative">
                   <span
                     aria-hidden
-                    className="absolute top-7 -left-[2.55rem] size-2.5 rounded-full border-2 border-primary bg-canvas sm:-left-[3.8rem]"
+                    className="absolute top-7 left-[-2.55rem] size-2.5 rounded-full border-2 border-primary bg-canvas sm:left-[-3.8rem]"
                   />
                   <MomentCard moment={moment} />
                 </Reveal>
@@ -83,6 +84,18 @@ function MomentCard({ moment }: { moment: MassMoment }) {
             </div>
           ))}
         </dl>
+      )}
+
+      {moment.why && (
+        <details className="group mt-4">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-sm font-semibold text-primary-strong hover:text-ink [&::-webkit-details-marker]:hidden">
+            <Plus className="size-4 transition-transform duration-300 group-open:rotate-45" />
+            Por que isso?
+          </summary>
+          <p className="mt-3 border-l-2 border-primary/40 pl-4 text-sm leading-relaxed text-ink/80">
+            {moment.why}
+          </p>
+        </details>
       )}
     </article>
   )

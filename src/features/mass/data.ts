@@ -9,6 +9,8 @@ export type MassMoment = {
   dialogue?: DialogueLine[]
   /** Momento que só acontece em domingos e solenidades. */
   sundaysOnly?: boolean
+  /** O sentido mais profundo do gesto (exibido em "Por que isso?"). */
+  why?: string
 }
 
 export type MassPart = {
@@ -35,6 +37,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Canto de entrada',
         description: 'O sacerdote entra em procissão e beija o altar, que representa Cristo.',
+        why: 'A procissão lembra que somos um povo a caminho, peregrinando rumo a Deus. O beijo no altar é um gesto de amor: o altar representa o próprio Cristo, pedra angular da Igreja.',
         posture: 'stand',
       },
       {
@@ -49,6 +52,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Ato penitencial',
         description: 'Um momento de silêncio para reconhecer os próprios pecados e pedir a misericórdia de Deus.',
+        why: 'Antes de ouvir a Palavra e celebrar a Eucaristia, reconhecemos humildemente que precisamos de Deus. Não é humilhação: é a atitude de quem se sabe amado apesar das falhas.',
         posture: 'stand',
         dialogue: [
           { speaker: 'priest', text: 'Senhor, tende piedade de nós.' },
@@ -58,6 +62,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Glória',
         description: 'Hino antigo de louvor, cantado aos domingos (exceto no Advento e na Quaresma) e nas festas.',
+        why: 'Suas primeiras palavras são o canto dos anjos na noite de Natal (Lucas 2,14). Omitido no Advento e na Quaresma, ele “volta” com mais força no Natal e na Páscoa.',
         posture: 'stand',
         sundaysOnly: true,
       },
@@ -87,6 +92,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Salmo responsorial',
         description: 'Um salmo cantado ou rezado. Todos repetem o refrão.',
+        why: 'Os salmos são as orações que o próprio Jesus rezava. Aqui, a Palavra de Deus se torna a nossa resposta a Deus.',
         posture: 'sit',
       },
       {
@@ -102,6 +108,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Aclamação e Evangelho',
         description: 'Todos se levantam para ouvir as palavras e ações de Jesus. Fazemos pequenas cruzes na testa, na boca e no peito.',
+        why: 'Ficamos de pé porque é o próprio Cristo quem fala. As três pequenas cruzes pedem que a Palavra esteja na nossa mente, nos nossos lábios e no nosso coração.',
         posture: 'stand',
         dialogue: [
           { speaker: 'priest', text: 'Proclamação do Evangelho de Jesus Cristo segundo N.' },
@@ -118,6 +125,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Profissão de fé (Creio)',
         description: 'Toda a assembleia proclama junta aquilo em que a Igreja crê.',
+        why: 'Depois de ouvir a Palavra, a assembleia responde com a fé da Igreja de todos os tempos. O Creio da Missa é o Niceno-Constantinopolitano, formulado nos concílios do século IV.',
         posture: 'stand',
         sundaysOnly: true,
       },
@@ -137,6 +145,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Apresentação das oferendas',
         description: 'O pão e o vinho são levados ao altar. É também o momento da coleta.',
+        why: 'O pão e o vinho são “fruto da terra e do trabalho humano”. Junto com eles, oferecemos também a nossa vida, que Deus vai santificar.',
         posture: 'sit',
       },
       {
@@ -151,6 +160,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Consagração',
         description: 'O sacerdote repete as palavras de Jesus na Última Ceia. O pão e o vinho se tornam o Corpo e o Sangue de Cristo.',
+        why: 'É o momento mais sagrado da Missa. As palavras de Jesus na Última Ceia, ditas pelo sacerdote, tornam presente o seu sacrifício. Por isso nos ajoelhamos em adoração.',
         posture: 'kneel',
         dialogue: [
           { speaker: 'priest', text: 'Mistério da fé!' },
@@ -168,6 +178,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Comunhão',
         description: 'Os católicos preparados recebem a Eucaristia. Quem não vai comungar pode permanecer no banco, rezando.',
+        why: 'Receber a Eucaristia é unir-se a Cristo e a todos os que comungam. Por isso a Igreja pede estar em estado de graça: é um gesto de comunhão plena.',
         posture: 'stand',
         dialogue: [
           { speaker: 'priest', text: 'O Corpo de Cristo.' },
@@ -191,6 +202,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Despedida',
         description: '“Missa” vem justamente do latim “missio”: envio, missão.',
+        why: 'A Missa não termina, ela continua na vida. Somos enviados para levar ao mundo o amor que recebemos.',
         posture: 'stand',
         dialogue: [
           { speaker: 'priest', text: 'Ide em paz, e o Senhor vos acompanhe.' },
