@@ -51,7 +51,6 @@ src/
   components/             # componentes reutilizáveis entre features
     layout/               # Header, Footer, PageHeader, 404…
     ui/                   # peças visuais base (vitral, rosácea, Reveal, ButtonLink…)
-    three/                # utilitários genéricos de cena 3D
   features/               # módulos por domínio; cada um expõe um index.ts
     <feature>/
       pages/              # páginas ligadas a rotas
@@ -64,7 +63,7 @@ src/
 ```
 
 Features: `home`, `trails`, `mass`, `liturgy`, `faq`, `curiosities`, `prayers`, `sacraments`,
-`liturgical-year`, `confession`, `glossary` e `church` (visualizador 3D).
+`liturgical-year`, `confession`, `glossary` e `church` (igreja em partículas da hero).
 
 A navegação (menu e rodapé) é gerada a partir de `navGroups` em `src/config/routes.ts`.
 
