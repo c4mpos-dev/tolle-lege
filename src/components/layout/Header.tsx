@@ -2,8 +2,9 @@ import { Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router'
-import { mainNav } from '@/config/routes'
+import { navGroups } from '@/config/routes'
 import { Logo } from './Logo'
+import { NavDropdown } from './NavDropdown'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -26,26 +27,13 @@ export function Header() {
       <header className="sticky top-0 z-40 border-b border-line/70 bg-canvas/85 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-10">
           <Logo onClick={close} />
-  
-          <nav aria-label="Principal" className="hidden md:block">
-            <ul className="flex items-center gap-1">
-              {mainNav.map((item) => (
-                <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) =>
-                      `relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                        isActive ? 'bg-primary-soft text-ink' : 'text-ink-muted hover:text-ink'
-                      }`
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+
+          <nav aria-label="Principal" className="hidden items-center gap-1 md:flex">
+            {navGroups.map((group) => (
+              <NavDropdown key={group.label} group={group} />
+            ))}
           </nav>
-  
+
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
@@ -74,28 +62,36 @@ export function Header() {
             transition={{ duration: 0.2 }}
             className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-canvas md:hidden"
           >
-            <ul className="px-6 py-8">
-              {mainNav.map((item, index) => (
-                <motion.li
-                  key={item.to}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * index }}
-                  className="border-b border-line"
+            <div className="space-y-8 px-6 py-8">
+              {navGroups.map((group, groupIndex) => (
+                <motion.section
+                  key={group.label}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06 * groupIndex }}
                 >
-                  <NavLink
-                    to={item.to}
-                    onClick={close}
-                    className={({ isActive }) =>
-                      `flex items-baseline gap-4 py-5 font-serif text-3xl ${isActive ? 'text-primary-strong' : 'text-ink'}`
-                    }
-                  >
-                    <span className="font-sans text-xs text-ink-muted">0{index + 1}</span>
-                    {item.label}
-                  </NavLink>
-                </motion.li>
+                  <p className="text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+                    {group.label}
+                  </p>
+                  <ul className="mt-2">
+                    {group.items.map((item) => (
+                      <li key={item.to} className="border-b border-line">
+                        <NavLink
+                          to={item.to}
+                          onClick={close}
+                          className={({ isActive }) =>
+                            `flex items-center gap-3 py-4 font-serif text-2xl ${isActive ? 'text-primary-strong' : 'text-ink'}`
+                          }
+                        >
+                          <item.icon className="size-5 text-primary" strokeWidth={1.5} />
+                          {item.label}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.section>
               ))}
-            </ul>
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>

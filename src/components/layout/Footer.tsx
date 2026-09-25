@@ -1,17 +1,14 @@
 import { Link } from 'react-router'
-import { mainNav } from '@/config/routes'
+import { navGroups } from '@/config/routes'
 import { Logo } from './Logo'
 
 export function Footer() {
   return (
     <footer className="bg-ink text-canvas/80">
       {/* Faixa de "vitral" no topo do rodapé */}
-      <div
-        aria-hidden
-        className="h-1.5 bg-linear-to-r from-marian via-primary to-terracotta"
-      />
+      <div aria-hidden className="h-1.5 bg-linear-to-r from-marian via-primary to-terracotta" />
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-[2fr_1fr] lg:px-10">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[2fr_3fr] lg:px-10">
         <div className="max-w-md">
           <Logo className="text-canvas" />
           <p className="mt-6 font-serif text-lg text-canvas/90 italic">
@@ -21,17 +18,23 @@ export function Footer() {
           <p className="mt-2 text-sm text-canvas/60">Santo Agostinho, Confissões I, 1</p>
         </div>
 
-        <nav aria-label="Rodapé">
-          <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Explore</p>
-          <ul className="mt-4 space-y-3">
-            {mainNav.map((item) => (
-              <li key={item.to}>
-                <Link to={item.to} className="text-sm transition-colors hover:text-canvas">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <nav aria-label="Rodapé" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          {navGroups.map((group) => (
+            <div key={group.label}>
+              <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+                {group.label}
+              </p>
+              <ul className="mt-4 space-y-3">
+                {group.items.map((item) => (
+                  <li key={item.to}>
+                    <Link to={item.to} className="text-sm transition-colors hover:text-canvas">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
       </div>
 
