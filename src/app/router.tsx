@@ -42,6 +42,26 @@ export const router = createBrowserRouter([
         lazy: () =>
           import('@/features/curiosities').then((m) => ({ Component: m.CuriositiesPage })),
       },
+      {
+        path: routes.prayers,
+        lazy: () => import('@/features/prayers').then((m) => ({ Component: m.PrayersPage })),
+      },
+      {
+        path: routes.sacraments,
+        lazy: () => import('@/features/sacraments').then((m) => ({ Component: m.SacramentsPage })),
+      },
+      {
+        path: routes.liturgicalYear,
+        lazy: () => import('@/features/liturgical-year').then((m) => ({ Component: m.LiturgicalYearPage })),
+      },
+      {
+        path: routes.confession,
+        lazy: () => import('@/features/confession').then((m) => ({ Component: m.ConfessionPage })),
+      },
+      {
+        path: routes.glossary,
+        lazy: () => import('@/features/glossary').then((m) => ({ Component: m.GlossaryPage })),
+      },
       { path: '*', Component: NotFoundPage },
     ],
   },
