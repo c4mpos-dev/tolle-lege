@@ -105,11 +105,17 @@ function TrailContent({ trail }: { trail: Trail }) {
                     </p>
                   </div>
 
+                  {step.link && (
+                    <ButtonLink to={step.link.to} variant="text" className="mt-4">
+                      {step.link.label}
+                    </ButtonLink>
+                  )}
+
                   <button
                     type="button"
                     onClick={() => toggle(index)}
                     aria-pressed={completed}
-                    className="mt-6 inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-ink aria-pressed:border-transparent aria-pressed:bg-ink aria-pressed:text-canvas"
+                    className="mt-6 flex w-fit items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-ink aria-pressed:border-transparent aria-pressed:bg-ink aria-pressed:text-canvas"
                   >
                     <Check className="size-4" />
                     {completed ? 'Concluído' : 'Marcar como concluído'}

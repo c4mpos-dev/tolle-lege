@@ -1,4 +1,5 @@
 import { Compass, DoorOpen, Droplets, Lightbulb, type LucideIcon } from 'lucide-react'
+import { routes } from '@/config/routes'
 
 export type TrailTone = 'sage' | 'marian' | 'terracotta' | 'primary'
 
@@ -7,6 +8,8 @@ export type TrailStep = {
   body: string[]
   /** Uma ação concreta para colocar o passo em prática. */
   practice: string
+  /** Página do site para aprofundar o passo. */
+  link?: { label: string; to: string }
 }
 
 export type Trail = {
@@ -58,6 +61,7 @@ export const trails: Trail[] = [
           'Na hora da Comunhão, você pode permanecer no banco rezando. Em muitas paróquias, também é possível ir à fila com os braços cruzados sobre o peito para receber uma bênção.',
         ],
         practice: 'Vá a uma Missa de domingo. Antes, leia como ela funciona na nossa página sobre a Missa.',
+        link: { label: 'Como funciona a Missa', to: routes.mass },
       },
       {
         title: 'Aprenda a rezar',
@@ -66,6 +70,7 @@ export const trails: Trail[] = [
           'Aos poucos, leia os Evangelhos: eles contam a vida de Jesus e são o centro da fé.',
         ],
         practice: 'Leia o Evangelho do dia na página de Liturgia e reze um Pai-Nosso ao final.',
+        link: { label: 'Orações essenciais', to: routes.prayers },
       },
       {
         title: 'Os sacramentos da iniciação',
@@ -74,6 +79,7 @@ export const trails: Trail[] = [
           'A partir daí, você passa a fazer parte plenamente da Igreja, e o caminho continua pela vida inteira.',
         ],
         practice: 'Converse com seu catequista sobre a data prevista para receber os sacramentos.',
+        link: { label: 'Os sete sacramentos', to: routes.sacraments },
       },
     ],
   },
@@ -99,6 +105,7 @@ export const trails: Trail[] = [
           'Se faz tempo, pode ser que algumas respostas tenham mudado. Não se preocupe: acompanhe a comunidade.',
         ],
         practice: 'Escolha uma paróquia e um horário de Missa para o próximo domingo.',
+        link: { label: 'Como funciona a Missa', to: routes.mass },
       },
       {
         title: 'Faça uma boa Confissão',
@@ -107,6 +114,7 @@ export const trails: Trail[] = [
           'Prepare-se com um exame de consciência, procure o padre e diga há quanto tempo não se confessa. Ele vai ajudá-lo em tudo.',
         ],
         practice: 'Procure os horários de Confissão da sua paróquia e faça um exame de consciência antes.',
+        link: { label: 'Guia da Confissão', to: routes.confession },
       },
       {
         title: 'Complete a sua iniciação',
@@ -114,6 +122,7 @@ export const trails: Trail[] = [
           'Se você foi batizado mas não fez a Primeira Eucaristia ou a Crisma, as paróquias oferecem catequese de adultos para completar a iniciação cristã.',
         ],
         practice: 'Pergunte na secretaria paroquial sobre a catequese de adultos ou a Crisma de adultos.',
+        link: { label: 'Sobre a Crisma', to: `${routes.sacraments}#confirmation` },
       },
       {
         title: 'Crie uma rotina de oração',
@@ -122,6 +131,7 @@ export const trails: Trail[] = [
           'Participar de um grupo ou pastoral da paróquia também ajuda a não caminhar sozinho.',
         ],
         practice: 'Escolha um horário fixo do dia para rezar por cinco minutos.',
+        link: { label: 'Terço guiado', to: `${routes.prayers}#terco` },
       },
     ],
   },
@@ -156,6 +166,7 @@ export const trails: Trail[] = [
           'Por isso a Eucaristia é chamada de “fonte e ápice” de toda a vida cristã.',
         ],
         practice: 'Leia João 6,51-58, onde Jesus fala do Pão da Vida.',
+        link: { label: 'Sobre a Eucaristia', to: `${routes.sacraments}#eucharist` },
       },
       {
         title: 'Maria e os santos',
@@ -164,6 +175,7 @@ export const trails: Trail[] = [
           'Pedir a intercessão de um santo é como pedir que um amigo reze por você.',
         ],
         practice: 'Leia o Magnificat, o cântico de Maria, em Lucas 1,46-55.',
+        link: { label: 'Os católicos adoram Maria?', to: `${routes.faq}#worship-mary` },
       },
       {
         title: 'O Papa e a Igreja',
@@ -195,6 +207,7 @@ export const trails: Trail[] = [
           'O resumo da fé está no Credo: um só Deus em três Pessoas (Pai, Filho e Espírito Santo); Jesus Cristo, verdadeiro Deus e verdadeiro homem, que morreu e ressuscitou; a Igreja; o perdão dos pecados e a vida eterna.',
         ],
         practice: 'Leia o Credo dos Apóstolos e anote o que mais chamou a sua atenção.',
+        link: { label: 'Ler o Credo', to: `${routes.prayers}#apostles-creed` },
       },
       {
         title: 'Os sete sacramentos',
@@ -202,6 +215,7 @@ export const trails: Trail[] = [
           'Sacramentos são sinais visíveis pelos quais Deus age na vida das pessoas. São sete: Batismo, Crisma, Eucaristia, Confissão, Unção dos Enfermos, Ordem e Matrimônio.',
         ],
         practice: 'Tente lembrar de quais sacramentos você já viu serem celebrados.',
+        link: { label: 'Os sete sacramentos', to: routes.sacraments },
       },
       {
         title: 'Símbolos e costumes',
@@ -210,6 +224,7 @@ export const trails: Trail[] = [
           'As cores, por exemplo, mudam conforme o tempo do ano: verde, roxo, branco, vermelho e rosa.',
         ],
         practice: 'Veja na página de Liturgia qual é a cor litúrgica de hoje.',
+        link: { label: 'As cores do ano litúrgico', to: routes.liturgicalYear },
       },
       {
         title: 'Visite uma Missa',
@@ -217,6 +232,7 @@ export const trails: Trail[] = [
           'Qualquer pessoa pode assistir a uma Missa, sem compromisso. Basta chegar, sentar e acompanhar. Ninguém vai pedir explicações.',
         ],
         practice: 'Leia como funciona a Missa e visite uma igreja perto de você.',
+        link: { label: 'Como funciona a Missa', to: routes.mass },
       },
     ],
   },
