@@ -1,3 +1,5 @@
+import { routes } from '@/config/routes'
+
 export type FaqCategory = 'faith' | 'mass' | 'sacraments' | 'life'
 
 export type FaqItem = {
@@ -5,6 +7,7 @@ export type FaqItem = {
   category: FaqCategory
   question: string
   answer: string[]
+  link?: { label: string; to: string }
 }
 
 export const faqCategories: Record<FaqCategory, string> = {
@@ -31,6 +34,7 @@ export const faqItems: FaqItem[] = [
       'Via de regra, não. A Comunhão expressa a fé comum na presença real de Cristo e a plena unidade com a Igreja. Por isso ela é reservada aos católicos preparados.',
       'Durante a Comunhão, você pode permanecer no banco rezando. Isso é perfeitamente normal.',
     ],
+    link: { label: 'Sobre a Eucaristia', to: `${routes.sacraments}#eucharist` },
   },
   {
     id: 'state-of-grace',
@@ -39,6 +43,7 @@ export const faqItems: FaqItem[] = [
     answer: [
       'Significa não ter nenhum pecado grave (mortal) sem ter se confessado. É a condição para receber a Comunhão. Pecados leves (veniais) não impedem de comungar.',
     ],
+    link: { label: 'Guia da Confissão', to: routes.confession },
   },
   {
     id: 'worship-mary',
@@ -57,6 +62,7 @@ export const faqItems: FaqItem[] = [
       'Porque Jesus deu aos apóstolos o poder de perdoar pecados em seu nome (João 20,22-23). Na Confissão, é Deus quem perdoa, por meio do sacerdote.',
       'O padre é obrigado a guardar sigilo absoluto sobre tudo o que ouve, sem nenhuma exceção.',
     ],
+    link: { label: 'Guia da Confissão', to: routes.confession },
   },
   {
     id: 'how-to-confess',
@@ -66,6 +72,7 @@ export const faqItems: FaqItem[] = [
       'Você faz o sinal da cruz, diz há quanto tempo não se confessa e conta seus pecados com simplicidade. O padre dá um conselho e uma penitência (geralmente uma oração).',
       'Depois você reza um ato de contrição (um pedido de perdão) e recebe a absolvição. Se estiver nervoso ou não lembrar como fazer, é só dizer: o padre conduz tudo.',
     ],
+    link: { label: 'Passo a passo e exame de consciência', to: routes.confession },
   },
   {
     id: 'what-to-wear',
@@ -82,6 +89,7 @@ export const faqItems: FaqItem[] = [
     answer: [
       'Aos domingos, cerca de uma hora. Nos dias de semana, costuma durar entre 30 e 40 minutos.',
     ],
+    link: { label: 'Como funciona a Missa', to: routes.mass },
   },
   {
     id: 'offering',
@@ -107,6 +115,7 @@ export const faqItems: FaqItem[] = [
     answer: [
       'É uma oração com o corpo: lembra a cruz de Cristo, pela qual fomos salvos, e a Santíssima Trindade, “em nome do Pai, e do Filho e do Espírito Santo”. É um costume dos primeiros séculos do cristianismo.',
     ],
+    link: { label: 'Orações essenciais', to: `${routes.prayers}#sign-of-cross` },
   },
   {
     id: 'catholic-vs-protestant',
@@ -132,6 +141,7 @@ export const faqItems: FaqItem[] = [
     answer: [
       'O Catecismo da Igreja Católica, publicado em 1992, é um resumo completo e organizado do que a Igreja crê, celebra, vive e reza. É o livro de referência para quem quer aprofundar.',
     ],
+    link: { label: 'Glossário da fé', to: routes.glossary },
   },
   {
     id: 'liturgical-seasons',
@@ -141,6 +151,7 @@ export const faqItems: FaqItem[] = [
       'São os tempos do ano litúrgico. O Advento prepara o Natal; a Quaresma, a Páscoa; o Tempo Pascal celebra a Ressurreição por 50 dias; e o Tempo Comum acompanha a vida pública de Jesus.',
       'Cada tempo tem sua cor: roxo no Advento e na Quaresma, branco no Natal e na Páscoa, verde no Tempo Comum.',
     ],
+    link: { label: 'Ano litúrgico', to: routes.liturgicalYear },
   },
   {
     id: 'find-parish',

@@ -1,8 +1,19 @@
 import { Plus } from 'lucide-react'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router'
+import { ButtonLink } from '@/components/ui/ButtonLink'
 import type { FaqItem } from '../data'
 
 /** Perguntas em acordeão (usa <details>, acessível sem JavaScript extra). */
 export function FaqList({ items }: { items: FaqItem[] }) {
+  const { hash } = useLocation()
+
+  // Chegou por um link direto (ex.: /faq#worship-mary)? Abre a pergunta correspondente.
+  useEffect(() => {
+    const target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null
+    if (target instanceof HTMLDetailsElement) target.open = true
+  }, [hash])
+
   return (
     <div className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-canvas">
       {items.map((item) => (
@@ -15,6 +26,11 @@ export function FaqList({ items }: { items: FaqItem[] }) {
             {item.answer.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+            {item.link && (
+              <ButtonLink to={item.link.to} variant="text" className="pt-1">
+                {item.link.label}
+              </ButtonLink>
+            )}
           </div>
         </details>
       ))}
