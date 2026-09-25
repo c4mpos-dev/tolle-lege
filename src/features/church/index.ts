@@ -1,1 +1,1 @@
-export { ChurchViewer } from './components/ChurchViewer'
+export { ParticleChurch } from './components/ParticleChurch'
