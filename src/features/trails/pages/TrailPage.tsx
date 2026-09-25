@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, Sparkles } from 'lucide-react'
+import { ArrowLeft, Check, Info, Sparkles, Users } from 'lucide-react'
 import { motion } from 'motion/react'
 import { Link, useParams } from 'react-router'
 import { ButtonLink } from '@/components/ui/ButtonLink'
@@ -52,6 +52,20 @@ function TrailContent({ trail }: { trail: Trail }) {
             </div>
           </div>
 
+          <div className="mt-8 space-y-4 leading-relaxed text-ink/85">
+            {trail.intro.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+
+          <p className="mt-6 flex gap-3 rounded-xl bg-canvas/70 p-4 text-sm text-ink">
+            <Users className={`mt-0.5 size-5 shrink-0 ${tone.text}`} />
+            <span>
+              <span className="font-semibold">Para quem é: </span>
+              {trail.audience}
+            </span>
+          </p>
+
           {/* Progresso */}
           <div className="mt-10">
             <div className="flex justify-between text-sm">
@@ -97,6 +111,32 @@ function TrailContent({ trail }: { trail: Trail }) {
                     ))}
                   </div>
 
+                  {step.scripture && (
+                    <figure className="mt-6 border-l-2 border-primary/50 pl-4">
+                      <blockquote className="font-serif text-lg text-ink/85 italic">
+                        “{step.scripture.text}”
+                      </blockquote>
+                      <figcaption className="mt-1 text-sm text-ink-muted">{step.scripture.reference}</figcaption>
+                    </figure>
+                  )}
+
+                  {step.tips && (
+                    <div className="mt-6 rounded-xl border border-line p-4">
+                      <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-primary-strong uppercase">
+                        <Info className="size-4" />
+                        Bom saber
+                      </p>
+                      <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink/80">
+                        {step.tips.map((tip) => (
+                          <li key={tip} className="flex gap-2">
+                            <span aria-hidden className="text-primary">·</span>
+                            {tip}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                   <div className={`mt-6 flex gap-3 rounded-xl p-4 ${tone.soft}`}>
                     <Sparkles className={`mt-0.5 size-5 shrink-0 ${tone.text}`} />
                     <p className="text-sm text-ink">
@@ -129,9 +169,7 @@ function TrailContent({ trail }: { trail: Trail }) {
         {done.length === trail.steps.length && (
           <Reveal className="mt-12 rounded-2xl bg-ink p-8 text-center text-canvas">
             <p className="font-serif text-2xl">Você concluiu esta trilha. 🙏</p>
-            <p className="mt-2 text-canvas/70">
-              O caminho continua: procure sua paróquia e siga dando passos.
-            </p>
+            <p className="mx-auto mt-2 max-w-lg text-canvas/70">{trail.closing}</p>
           </Reveal>
         )}
       </section>
