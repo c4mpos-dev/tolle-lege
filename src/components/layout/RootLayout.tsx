@@ -1,8 +1,10 @@
+import type { ReactNode } from 'react'
 import { Outlet, ScrollRestoration, useNavigation } from 'react-router'
 import { Footer } from './Footer'
 import { Header } from './Header'
 
-export function RootLayout() {
+/** Estrutura de todas as páginas. `children` recebe elementos globais (avisos, sobreposições). */
+export function RootLayout({ children }: { children?: ReactNode }) {
   const navigation = useNavigation()
 
   return (
@@ -24,6 +26,7 @@ export function RootLayout() {
         <Outlet />
       </main>
       <Footer />
+      {children}
       <ScrollRestoration />
     </div>
   )
