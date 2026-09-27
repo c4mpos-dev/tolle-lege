@@ -7,8 +7,10 @@ import {
   HandHeart,
   Lightbulb,
   MessageCircleQuestion,
+  Rose,
   Route,
   Sparkles,
+  Triangle,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -26,6 +28,8 @@ export const routes = {
   liturgicalYear: '/liturgical-year',
   confession: '/confession',
   glossary: '/glossary',
+  trinity: '/trinity',
+  roseNovena: '/rose-novena',
 } as const
 
 export type NavItem = {
@@ -74,6 +78,12 @@ export const navGroups: NavGroup[] = [
         icon: Church,
       },
       {
+        label: 'Santíssima Trindade',
+        to: routes.trinity,
+        description: 'Um só Deus em três Pessoas',
+        icon: Triangle,
+      },
+      {
         label: 'Sacramentos',
         to: routes.sacraments,
         description: 'Os sete sinais da graça',
@@ -107,6 +117,12 @@ export const navGroups: NavGroup[] = [
         to: routes.prayers,
         description: 'Orações essenciais e terço guiado',
         icon: Sparkles,
+      },
+      {
+        label: 'Novena das Rosas',
+        to: routes.roseNovena,
+        description: 'Nove dias com Santa Teresinha',
+        icon: Rose,
       },
       {
         label: 'Confissão',

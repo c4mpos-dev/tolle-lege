@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router'
 import { NotFoundPage } from '@/components/layout/NotFoundPage'
-import { PageFallback, RootLayout } from '@/components/layout/RootLayout'
+import { PageFallback } from '@/components/layout/RootLayout'
 import { routes } from '@/config/routes'
+import { AppLayout } from './AppLayout'
 
 /*
  * Cada página é carregada sob demanda (code splitting): o three.js da home,
@@ -10,7 +11,7 @@ import { routes } from '@/config/routes'
 export const router = createBrowserRouter([
   {
     path: routes.home,
-    Component: RootLayout,
+    Component: AppLayout,
     HydrateFallback: PageFallback,
     children: [
       {
@@ -61,6 +62,14 @@ export const router = createBrowserRouter([
       {
         path: routes.glossary,
         lazy: () => import('@/features/glossary').then((m) => ({ Component: m.GlossaryPage })),
+      },
+      {
+        path: routes.trinity,
+        lazy: () => import('@/features/trinity').then((m) => ({ Component: m.TrinityPage })),
+      },
+      {
+        path: routes.roseNovena,
+        lazy: () => import('@/features/rose-novena').then((m) => ({ Component: m.RoseNovenaPage })),
       },
       { path: '*', Component: NotFoundPage },
     ],
