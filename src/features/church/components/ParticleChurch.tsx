@@ -45,6 +45,7 @@ function createUniforms() {
     uTextOffset: { value: new Vector3() },
     uChurchOffset: { value: new Vector3() },
     uRotation: { value: 0 },
+    uTilt: { value: 0 },
     uFade: { value: 0 },
     uMouse: { value: new Vector2(10, 10) },
     uMouseStrength: { value: 0 },
@@ -239,9 +240,13 @@ function ParticleField({ morph, reducedMotion }: ParticleChurchProps) {
     u.uChurchSize.value = wide ? 24 : 26
     u.uTextOffset.value.set(0, wide ? height * 0.06 : height * 0.1, 0)
     u.uChurchScale.value = wide
-      ? Math.min(height * 0.62, (width * 0.46) / aspect)
+      ? Math.min(height * 0.6, (width * 0.4) / aspect)
       : Math.min(height * 0.36, (width * 0.78) / aspect)
     u.uChurchOffset.value.set(wide ? width * 0.21 : 0, wide ? height * 0.07 : height * 0.23, 0)
+    // A igreja fica acima da câmera; sem inclinar, veríamos a parte de baixo dela.
+    // Compensa esse ângulo e, no celular, inclina um pouco mais para mostrar o telhado.
+    const aboveCamera = Math.atan2(u.uChurchOffset.value.y, state.camera.position.z)
+    u.uTilt.value = aboveCamera + (wide ? 0 : 0.12)
 
     u.uRotation.value = nextRotation(u.uRotation.value, delta)
     // Cursor de "agarrar" só quando a igreja já está formada, em telas de desktop
@@ -327,7 +332,8 @@ function ChurchModel({ count, materialRef, onReady }: ChurchModelProps) {
     if (!group.visible) return
 
     group.position.copy(uniforms.uChurchOffset.value)
-    group.rotation.y = uniforms.uRotation.value
+    // Euler XYZ: aplica o giro em Y e depois a inclinação em X, como no shader
+    group.rotation.set(uniforms.uTilt.value, uniforms.uRotation.value, 0)
     group.scale.setScalar(uniforms.uChurchScale.value)
 
     applyFade(materials.current, fade)

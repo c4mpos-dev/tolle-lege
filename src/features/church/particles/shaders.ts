@@ -17,6 +17,7 @@ export const vertexShader = /* glsl */ `
   uniform vec3 uTextOffset;
   uniform vec3 uChurchOffset;
   uniform float uRotation;
+  uniform float uTilt;
   uniform float uFade;
   uniform vec2 uMouse;
   uniform float uMouseStrength;
@@ -43,11 +44,14 @@ export const vertexShader = /* glsl */ `
     vec3 textPos = aText * uTextScale + uTextOffset;
     vec3 p = mix(aScatter, textPos, intro);
 
-    // Texto → igreja (girando em torno do eixo vertical)
+    // Texto → igreja: gira no eixo vertical e depois inclina para a frente (mesma ordem do modelo 3D)
     vec3 c = aChurch * uChurchScale;
     float cs = cos(uRotation);
     float sn = sin(uRotation);
-    c = vec3(c.x * cs + c.z * sn, c.y, -c.x * sn + c.z * cs) + uChurchOffset;
+    c = vec3(c.x * cs + c.z * sn, c.y, -c.x * sn + c.z * cs);
+    float ct = cos(uTilt);
+    float st = sin(uTilt);
+    c = vec3(c.x, c.y * ct - c.z * st, c.y * st + c.z * ct) + uChurchOffset;
 
     float morph = easeInOut(clamp((uMorph - delay * 0.35) / 0.65, 0.0, 1.0));
     vec3 swirl = (aRandom.yzw - 0.5) * 5.0 * sin(3.14159 * morph);
