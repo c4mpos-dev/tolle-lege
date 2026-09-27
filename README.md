@@ -27,6 +27,8 @@ Site de introdução à fé cristã católica.
 | `/liturgical-year`  | Ano litúrgico (calculado a partir da Páscoa)        |
 | `/confession`       | Guia da Confissão e exame de consciência            |
 | `/glossary`         | Glossário da fé                                     |
+| `/trinity`          | Santíssima Trindade e heresias antigas              |
+| `/rose-novena`      | Novena das Rosas a Santa Teresinha                  |
 
 Em produção, configure o servidor para redirecionar rotas desconhecidas para `index.html` (SPA).
 
@@ -63,7 +65,7 @@ src/
 ```
 
 Features: `home`, `trails`, `mass`, `liturgy`, `faq`, `curiosities`, `prayers`, `sacraments`,
-`liturgical-year`, `confession`, `glossary` e `church` (igreja em partículas da hero).
+`liturgical-year`, `confession`, `glossary`, `trinity`, `rose-novena` e `church` (igreja em partículas da hero).
 
 A navegação (menu e rodapé) é gerada a partir de `navGroups` em `src/config/routes.ts`.
 
