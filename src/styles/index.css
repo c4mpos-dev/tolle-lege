@@ -31,6 +31,8 @@
   --color-terracotta-soft: #f6e4de;
   --color-sage: #5f7f63; /* primeiros passos */
   --color-sage-soft: #e5ede4;
+  --color-rose: #b3334e; /* Novena das Rosas */
+  --color-rose-soft: #f8e3e7;
 
   /* Tipografia */
   --font-serif: 'Fraunces Variable', ui-serif, Georgia, serif;
