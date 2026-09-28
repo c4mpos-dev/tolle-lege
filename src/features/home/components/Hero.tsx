@@ -78,7 +78,10 @@ export function Hero() {
               transition={{ duration: 1, delay: 2.2, ease: EASE }}
               className="font-serif text-xl text-canvas/85 italic sm:text-2xl"
             >
-              “Toma e lê, toma e lê.”
+              <span lang="la">“Tolle, lege; tolle, lege.”</span>
+              <span className="mt-1 block text-base text-canvas/60 sm:text-lg">
+                “Toma e lê, toma e lê.”
+              </span>
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
@@ -86,7 +89,7 @@ export function Hero() {
               transition={{ duration: 1, delay: 2.6 }}
               className="mt-1 text-sm text-canvas/50"
             >
-              Santo Agostinho, Confissões VIII, 12
+              Santo Agostinho, Confissões VIII, 12, 29
             </motion.p>
 
             <motion.div
