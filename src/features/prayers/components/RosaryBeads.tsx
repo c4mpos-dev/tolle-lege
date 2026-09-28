@@ -21,10 +21,11 @@ function loopPosition(index: number) {
 type RosaryBeadsProps = {
   current: Bead | null
   done: Set<string>
+  className?: string
 }
 
 /** Desenho do terço. As contas já rezadas ficam douradas; a atual brilha. */
-export function RosaryBeads({ current, done }: RosaryBeadsProps) {
+export function RosaryBeads({ current, done, className = 'w-full max-w-xs' }: RosaryBeadsProps) {
   const stateOf = (bead: Bead): BeadState =>
     current && beadKey(current) === beadKey(bead) ? 'current' : done.has(beadKey(bead)) ? 'done' : 'todo'
 
@@ -35,7 +36,7 @@ export function RosaryBeads({ current, done }: RosaryBeadsProps) {
   }
 
   return (
-    <svg viewBox="0 0 300 400" className="w-full max-w-xs" aria-hidden>
+    <svg viewBox="0 0 300 400" className={className} aria-hidden>
       {/* Fio */}
       <circle cx={CX} cy={CY} r={RADIUS} fill="none" stroke="var(--color-line)" strokeWidth="1.5" />
       <line x1={CX} y1={MEDAL_Y} x2={CX} y2={PENDANT_Y[0]} stroke="var(--color-line)" strokeWidth="1.5" />

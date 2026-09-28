@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { prayers } from '../data'
 import { beadKey, buildRosarySteps, mysterySetForDate, mysterySets, type MysterySetId } from '../rosary'
 import { RosaryBeads } from './RosaryBeads'
@@ -12,6 +12,23 @@ const setIds = Object.keys(mysterySets) as MysterySetId[]
 export function RosaryGuide() {
   const [setId, setSetId] = useState<MysterySetId>(() => mysterySetForDate(new Date()))
   const [index, setIndex] = useState(0)
+  const prayerRef = useRef<HTMLDivElement>(null)
+  const stickyBarRef = useRef<HTMLDivElement>(null)
+  const isFirstRender = useRef(true)
+
+  // No celular, ao mudar de passo, traz o início da oração para logo abaixo do terço fixo.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    const prayer = prayerRef.current
+    const bar = stickyBarRef.current
+    if (!prayer || !bar || getComputedStyle(bar).position !== 'sticky') return
+    const barBottom = bar.getBoundingClientRect().bottom
+    const top = prayer.getBoundingClientRect().top
+    if (top < barBottom) window.scrollBy({ top: top - barBottom - 16, behavior: 'smooth' })
+  }, [index])
   const step = steps[index]
   const set = mysterySets[setId]
   const mystery = step.decade !== undefined ? set.mysteries[step.decade] : null
@@ -29,18 +46,36 @@ export function RosaryGuide() {
     setIndex((current) => Math.min(Math.max(current + delta, 0), steps.length - 1))
 
   return (
-    <div className="grid gap-10 rounded-3xl border border-line bg-canvas p-6 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-14">
-      <div className="flex flex-col items-center">
-        <RosaryBeads current={step.bead} done={done} />
-        <div className="mt-4 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-surface">
-          <div
-            className="h-full rounded-full bg-primary transition-[width] duration-300"
-            style={{ width: `${((index + 1) / steps.length) * 100}%` }}
-          />
+    <div className="grid grid-cols-1 gap-6 rounded-3xl border border-line bg-canvas p-6 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-14">
+      {/*
+       * No celular, o terço fica fixo no topo (compacto) e os botões fixos embaixo,
+       * para que a conta atual continue visível enquanto a oração rola.
+       */}
+      <div
+        ref={stickyBarRef}
+        className="sticky top-16 z-10 -mx-6 -mt-6 flex items-center gap-4 rounded-t-3xl border-b border-line bg-canvas/95 px-6 py-3 backdrop-blur-md sm:-mx-10 sm:-mt-10 sm:px-10 lg:static lg:m-0 lg:flex-col lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+        <RosaryBeads
+          current={step.bead}
+          done={done}
+          className="w-24 shrink-0 sm:w-32 lg:w-full lg:max-w-xs"
+        />
+        <div className="min-w-0 flex-1 lg:w-full lg:max-w-xs lg:flex-none lg:text-center">
+          <p className="truncate text-xs font-semibold tracking-[0.15em] text-primary-strong uppercase lg:hidden">
+            {step.label}
+          </p>
+          {mystery && (
+            <p className="mt-1 truncate font-serif text-sm text-ink lg:hidden">{mystery.title}</p>
+          )}
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-surface lg:mt-4">
+            <div
+              className="h-full rounded-full bg-primary transition-[width] duration-300"
+              style={{ width: `${((index + 1) / steps.length) * 100}%` }}
+            />
+          </div>
+          <p className="mt-2 text-xs text-ink-muted">
+            Passo {index + 1} de {steps.length}
+          </p>
         </div>
-        <p className="mt-2 text-xs text-ink-muted">
-          Passo {index + 1} de {steps.length}
-        </p>
       </div>
 
       <div className="flex min-w-0 flex-col">
@@ -61,7 +96,7 @@ export function RosaryGuide() {
           {set.title}: {set.days.toLowerCase()}
         </p>
 
-        <div aria-live="polite" className="mt-8 flex-1">
+        <div ref={prayerRef} aria-live="polite" className="mt-6 flex-1 lg:mt-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -70,12 +105,13 @@ export function RosaryGuide() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <p className="text-xs font-semibold tracking-[0.2em] text-primary-strong uppercase">
+              {/* No celular, o rótulo já aparece no topo fixo */}
+              <p className="hidden text-xs font-semibold tracking-[0.2em] text-primary-strong uppercase lg:block">
                 {step.label}
               </p>
 
               {mystery && (
-                <div className="mt-4 rounded-xl bg-primary-soft px-4 py-3">
+                <div className="rounded-xl lg:mt-4 bg-primary-soft px-4 py-3">
                   <p className="font-serif text-lg text-ink">{mystery.title}</p>
                   <p className="text-xs text-ink-muted">{mystery.reference}</p>
                 </div>
@@ -84,7 +120,7 @@ export function RosaryGuide() {
               <h3 className="mt-5 font-serif text-2xl font-medium text-ink">
                 {prayers[step.prayer].title}
               </h3>
-              <div className="mt-3 space-y-2 font-serif text-lg leading-relaxed text-ink/85">
+              <div className="mt-3 space-y-2 font-serif text-base leading-relaxed text-ink/85 sm:text-lg">
                 {prayers[step.prayer].text.split('\n').map((line) => (
                   <p key={line}>{line}</p>
                 ))}
@@ -99,7 +135,7 @@ export function RosaryGuide() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-3">
+        <div className="sticky bottom-0 z-10 -mx-6 -mb-6 mt-6 flex flex-wrap items-center gap-3 rounded-b-3xl border-t border-line bg-canvas/95 px-6 py-3 backdrop-blur-md sm:-mx-10 sm:-mb-10 sm:px-10 lg:static lg:m-0 lg:mt-10 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
           <button
             type="button"
             onClick={() => go(-1)}
