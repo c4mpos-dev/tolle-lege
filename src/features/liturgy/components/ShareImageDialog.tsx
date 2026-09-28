@@ -1,7 +1,8 @@
 import { Download, Share2, X } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { canvasToFile, loadShareFonts, renderShareCard } from '../share/renderShareCard'
+import { createPortal } from 'react-dom'
+import { canvasToFile, loadShareFonts, measureShareCard, renderShareCard } from '../share/renderShareCard'
 import { segmentsOf } from '../share/segments'
 import {
   shareFormats,
@@ -13,8 +14,6 @@ import {
   type ShareThemeId,
 } from '../share/themes'
 import type { LiturgicalColor, Psalm, Reading } from '../types'
-
-const MAX_CHARS = 420
 
 type ShareImageDialogProps = {
   item: Reading | Psalm
@@ -47,7 +46,28 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
     .filter((segment) => selected.includes(segment.id))
     .map((segment) => segment.text)
     .join(' ')
-  const tooLong = quote.length > MAX_CHARS
+  const content = useMemo(
+    () => ({
+      eyebrow: eyebrowFor(date),
+      quote: quote || '…',
+      reference: item.referencia,
+      title: 'titulo' in item ? item.titulo : 'Salmo responsorial',
+    }),
+    [date, quote, item],
+  )
+
+  // Em vez de um limite fixo de caracteres, verifica se o trecho cabe com letra legível em cada formato.
+  const fitByFormat = useMemo(() => {
+    if (!fontsReady) return null
+    return Object.fromEntries(
+      shareFormats.map((format) => [format.id, measureShareCard(content, format.width, format.height)]),
+    ) as Record<ShareFormatId, ReturnType<typeof measureShareCard>>
+  }, [fontsReady, content])
+
+  const fit = fitByFormat?.[formatId]
+  const tooLong = fit ? !fit.fits : false
+  const usage = Math.min(fit?.usage ?? 0, 1)
+  const formatThatFits = shareFormats.find((format) => fitByFormat?.[format.id]?.fits)
   const canShareFiles = typeof navigator !== 'undefined' && 'canShare' in navigator
 
   useEffect(() => {
@@ -70,22 +90,13 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
     const canvas = canvasRef.current
     if (!canvas || !fontsReady) return
     const format = shareFormats.find((f) => f.id === formatId)!
-    renderShareCard(
-      canvas,
-      {
-        eyebrow: eyebrowFor(date),
-        quote: quote || '…',
-        reference: item.referencia,
-        title: 'titulo' in item ? item.titulo : 'Salmo responsorial',
-      },
-      {
-        width: format.width,
-        height: format.height,
-        radius: shareRadii.find((r) => r.id === radiusId)!.value,
-        theme: shareThemes.find((t) => t.id === themeId)!,
-      },
-    )
-  }, [fontsReady, quote, themeId, radiusId, formatId, item, date])
+    renderShareCard(canvas, content, {
+      width: format.width,
+      height: format.height,
+      radius: shareRadii.find((r) => r.id === radiusId)!.value,
+      theme: shareThemes.find((t) => t.id === themeId)!,
+    })
+  }, [fontsReady, content, themeId, radiusId, formatId])
 
   const toggle = (id: string) =>
     setSelected((current) =>
@@ -117,7 +128,9 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
     }
   }
 
-  return (
+  // Portal no <body>: fora de ancestrais com transform (animações), que prenderiam o
+  // editor numa camada abaixo do cabeçalho do site e das pétalas da novena.
+  return createPortal(
     <div className="fixed inset-0 z-60 flex items-end justify-center bg-ink/60 backdrop-blur-sm sm:items-center sm:p-6" onClick={onClose}>
       <motion.div
         role="dialog"
@@ -174,9 +187,13 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
                   )
                 })}
               </ul>
-              <p className={`mt-2 text-xs ${tooLong ? 'font-semibold text-terracotta' : 'text-ink-muted'}`}>
-                {tooLong ? `Trecho longo demais: escolha até ${MAX_CHARS} caracteres.` : `${quote.length} de ${MAX_CHARS} caracteres`}
-              </p>
+              <SpaceMeter
+                usage={usage}
+                tooLong={tooLong}
+                formatName={shareFormats.find((f) => f.id === formatId)!.name}
+                suggestion={tooLong && formatThatFits ? formatThatFits : null}
+                onSuggest={(id) => setFormatId(id)}
+              />
             </fieldset>
 
             <fieldset>
@@ -243,7 +260,8 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
           )}
         </footer>
       </motion.div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -258,6 +276,49 @@ function initialSelection(segments: { id: string; text: string }[]) {
     length += segment.text.length
   }
   return chosen
+}
+
+type SpaceMeterProps = {
+  usage: number
+  tooLong: boolean
+  formatName: string
+  suggestion: { id: ShareFormatId; name: string } | null
+  onSuggest: (id: ShareFormatId) => void
+}
+
+/** Mostra quanto do espaço da imagem o trecho escolhido ocupa. */
+function SpaceMeter({ usage, tooLong, formatName, suggestion, onSuggest }: SpaceMeterProps) {
+  const barColor = tooLong ? 'bg-terracotta' : usage > 0.85 ? 'bg-primary-strong' : 'bg-primary'
+
+  return (
+    <div className="mt-3" aria-live="polite">
+      <div className="h-1.5 overflow-hidden rounded-full bg-surface">
+        <div
+          className={`h-full rounded-full transition-[width] duration-300 ${barColor}`}
+          style={{ width: `${tooLong ? 100 : Math.max(usage * 100, 4)}%` }}
+        />
+      </div>
+      {tooLong ? (
+        <p className="mt-2 text-xs font-semibold text-terracotta">
+          Muito texto para o formato {formatName}.{' '}
+          {suggestion ? (
+            <>
+              <button type="button" onClick={() => onSuggest(suggestion.id)} className="underline underline-offset-2">
+                Usar {suggestion.name}
+              </button>{' '}
+              ou escolha menos trechos.
+            </>
+          ) : (
+            'Escolha menos trechos.'
+          )}
+        </p>
+      ) : (
+        <p className="mt-2 text-xs text-ink-muted">
+          {usage > 0.85 ? 'Quase sem espaço nesta imagem.' : 'Ainda cabe mais texto nesta imagem.'}
+        </p>
+      )}
+    </div>
+  )
 }
 
 type OptionGroupProps = {
