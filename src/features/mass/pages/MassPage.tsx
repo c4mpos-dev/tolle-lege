@@ -28,7 +28,7 @@ export function MassPage() {
         <aside className="order-first lg:order-last">
           <div className="space-y-6 lg:sticky lg:top-24">
             <nav aria-label="Partes da Missa" className="hidden rounded-2xl border border-line bg-canvas p-6 lg:block">
-              <p className="text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+              <p className="rubric text-primary-strong">
                 As 4 partes
               </p>
               <ol className="mt-4 space-y-3">

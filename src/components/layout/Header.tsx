@@ -24,7 +24,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line/70 bg-canvas/85 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b-[3px] border-double border-line bg-parchment/90 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-10">
           <Logo onClick={close} />
 
@@ -60,7 +60,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-canvas md:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-parchment md:hidden"
           >
             <div className="space-y-8 px-6 py-8">
               {navGroups.map((group, groupIndex) => (
@@ -70,7 +70,7 @@ export function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.06 * groupIndex }}
                 >
-                  <p className="text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+                  <p className="rubric text-primary-strong">
                     {group.label}
                   </p>
                   <ul className="mt-2">

@@ -68,7 +68,7 @@ export function ConfessionPage() {
 
         {/* Ato de contrição */}
         <Reveal className="mt-16 rounded-3xl bg-primary-soft p-8 sm:p-10">
-          <p className="text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+          <p className="rubric text-primary-strong">
             Para rezar no confessionário
           </p>
           <h2 className="mt-2 font-serif text-3xl text-ink">{contrition.title}</h2>

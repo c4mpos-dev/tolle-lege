@@ -67,7 +67,7 @@ export function TrinityPage() {
         </ol>
 
         <Reveal className="mt-12 rounded-3xl border border-line bg-surface p-6 sm:p-10">
-          <p className="text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+          <p className="rubric text-primary-strong">
             O Escudo da Trindade
           </p>
           <p className="mt-2 max-w-2xl text-ink-muted">
@@ -139,7 +139,7 @@ export function TrinityPage() {
       <section id="heresias" className="scroll-mt-20 bg-ink py-16 text-canvas sm:py-24">
         <div className="mx-auto max-w-5xl px-6">
           <Reveal>
-            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Heresias antigas</p>
+            <p className="rubric text-primary">Heresias antigas</p>
             <h2 className="mt-3 font-serif text-4xl font-medium tracking-tight sm:text-5xl">
               Os erros que ajudaram a Igreja a falar certo
             </h2>
@@ -222,7 +222,7 @@ export function TrinityPage() {
         </div>
 
         <Reveal className="mt-5 rounded-3xl bg-primary-soft p-7 sm:p-10">
-          <p className="text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+          <p className="rubric text-primary-strong">
             Para guardar
           </p>
           <blockquote className="mt-3 font-serif text-2xl leading-snug text-ink sm:text-3xl">

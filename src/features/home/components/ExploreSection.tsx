@@ -28,7 +28,7 @@ export function ExploreSection() {
             <Tile to={routes.liturgicalYear} className="bg-ink text-canvas">
               <div className="flex h-full flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+                  <p className="rubric text-primary">
                     Ano litúrgico
                   </p>
                   <p className="mt-4 font-serif text-4xl sm:text-5xl">{season.name}</p>

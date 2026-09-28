@@ -181,7 +181,7 @@ function TrailContent({ trail }: { trail: Trail }) {
 
       <section className="border-t border-line bg-surface">
         <div className="mx-auto max-w-3xl px-6 py-14">
-          <p className="text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+          <p className="rubric text-primary-strong">
             Outras trilhas
           </p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-3">

@@ -31,7 +31,7 @@ export function TourPage() {
 
       <section id="visita" className="scroll-mt-16 bg-ink text-canvas">
         <div className="mx-auto max-w-7xl px-6 pt-10 pb-6 lg:px-10">
-          <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+          <p className="flex items-center gap-2 rubric text-primary">
             <Rosette className="size-4" />
             Visita guiada
           </p>

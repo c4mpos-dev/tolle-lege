@@ -3,13 +3,13 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import type { MotionValue } from 'motion/react'
 import { type RefObject, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
-  AdditiveBlending,
   BufferAttribute,
   BufferGeometry,
   type Group,
   type Material,
   MathUtils,
   type Mesh,
+  NormalBlending,
   ShaderMaterial,
   Vector2,
   Vector3,
@@ -30,7 +30,7 @@ const SWAY_AMPLITUDE = Math.PI / 5
 const SWAY_SPEED = 0.35
 /** Tempo parado, depois de arrastar, até o balanço voltar. */
 const RESUME_DELAY_MS = 3000
-const GOLD = [0.93, 0.76, 0.42]
+const INK = [0.3, 0.2, 0.12]
 
 function createUniforms() {
   return {
@@ -63,7 +63,7 @@ function createParticleGeometry(count: number) {
     scatter[i * 3 + 1] = (Math.random() - 0.5) * 12
     scatter[i * 3 + 2] = (Math.random() - 0.5) * 10 - 2
     for (let j = 0; j < 4; j++) random[i * 4 + j] = Math.random()
-    colors.set(GOLD, i * 3)
+    colors.set(INK, i * 3)
   }
   const geometry = new BufferGeometry()
   geometry.setAttribute('position', new BufferAttribute(scatter, 3))
@@ -80,6 +80,15 @@ type ParticleChurchProps = {
   morph: MotionValue<number>
   /** Pula as animações e mostra a igreja pronta. */
   reducedMotion: boolean
+  /** Tela larga: igreja maior, no centro. Estreita: menor, na metade de cima. */
+  wide: boolean
+  /** Altura do horizonte (fração da tela, a partir do topo) onde a base da igreja se apoia. */
+  horizon: number
+  /**
+   * Recebe `--church-y` (centro da igreja, % a partir do topo) e `--church-size` (altura em px),
+   * para a página alinhar decorações em HTML atrás da igreja.
+   */
+  layoutTarget?: RefObject<HTMLElement | null>
 }
 
 type Uniforms = ReturnType<typeof createUniforms>
@@ -101,7 +110,7 @@ export function ParticleChurch(props: ParticleChurchProps) {
   )
 }
 
-function ParticleField({ morph, reducedMotion }: ParticleChurchProps) {
+function ParticleField({ morph, reducedMotion, wide, horizon, layoutTarget }: ParticleChurchProps) {
   const count = useMemo(() => (window.innerWidth < 768 ? 16_000 : 22_000), [])
   const churchAspect = useRef(1.3)
   const churchLoaded = useRef(false)
@@ -109,6 +118,7 @@ function ParticleField({ morph, reducedMotion }: ParticleChurchProps) {
   const mouse = useRef({ ndc: new Vector2(10, 10), clientX: 0, lastMove: -Infinity })
   const drag = useRef({ active: false, startX: 0, startRotation: 0, releasedAt: -Infinity })
   const swayPhase = useRef(0)
+  const lastLayout = useRef('')
   const canvas = useThree((state) => state.gl.domElement)
 
   const geometry = useMemo(() => createParticleGeometry(count), [count])
@@ -231,22 +241,35 @@ function ParticleField({ morph, reducedMotion }: ParticleChurchProps) {
     // No fim do voo, as partículas se dissolvem e o modelo 3D aparece (só se ele já carregou)
     u.uFade.value = churchLoaded.current ? MathUtils.smoothstep(u.uMorph.value, 0.8, 0.97) : 0
 
-    // Layout responsivo: telas largas põem a igreja à direita; estreitas, em cima.
-    const wide = width / height > 1.05
+    // Layout responsivo: a igreja fica centrada, com a base apoiada na linha do horizonte.
     const aspect = churchAspect.current
     u.uTextScale.value = Math.min(width * 0.82, 11)
     // Pontos menores em telas estreitas: com brilho aditivo, texto pequeno "estoura" em branco.
     u.uSize.value = 30 * MathUtils.clamp(width / 11, 0.5, 1)
     u.uChurchSize.value = wide ? 24 : 26
-    u.uTextOffset.value.set(0, wide ? height * 0.06 : height * 0.1, 0)
-    u.uChurchScale.value = wide
-      ? Math.min(height * 0.6, (width * 0.4) / aspect)
-      : Math.min(height * 0.36, (width * 0.78) / aspect)
-    u.uChurchOffset.value.set(wide ? width * 0.21 : 0, wide ? height * 0.07 : height * 0.23, 0)
+    u.uTextOffset.value.set(0, wide ? height * 0.08 : height * 0.1, 0)
+    const scale = wide
+      ? Math.min(height * 0.6, (width * 0.39) / aspect)
+      : Math.min(height * 0.32, (width * 0.7) / aspect)
+    u.uChurchScale.value = scale
+    // O modelo tem altura 1 e centro na origem; afunda um pouco para "pisar" no chão.
+    u.uChurchOffset.value.set(0, height * (0.5 - horizon) + scale * 0.47, 0)
+
+    const target = layoutTarget?.current
+    if (target) {
+      const y = ((0.5 - u.uChurchOffset.value.y / height) * 100).toFixed(2)
+      const size = ((scale / height) * state.size.height).toFixed(1)
+      const layout = `${y}|${size}`
+      if (layout !== lastLayout.current) {
+        lastLayout.current = layout
+        target.style.setProperty('--church-y', `${y}%`)
+        target.style.setProperty('--church-size', `${size}px`)
+      }
+    }
     // A igreja fica acima da câmera; sem inclinar, veríamos a parte de baixo dela.
     // Compensa esse ângulo e, no celular, inclina um pouco mais para mostrar o telhado.
     const aboveCamera = Math.atan2(u.uChurchOffset.value.y, state.camera.position.z)
-    u.uTilt.value = aboveCamera + (wide ? 0 : 0.12)
+    u.uTilt.value = aboveCamera + (wide ? 0.05 : 0.12)
 
     u.uRotation.value = nextRotation(u.uRotation.value, delta)
     // Cursor de "agarrar" só quando a igreja já está formada, em telas de desktop
@@ -269,13 +292,13 @@ function ParticleField({ morph, reducedMotion }: ParticleChurchProps) {
           uniforms={uniforms}
           transparent
           depthWrite={false}
-          blending={AdditiveBlending}
+          blending={NormalBlending}
         />
       </points>
       <Suspense fallback={null}>
         <Environment files={ENVIRONMENT_HDR_URL} environmentIntensity={0.8} />
-        {/* Luz quente, como sol da manhã entrando pela janela */}
-        <directionalLight position={[-6, 9, 7]} intensity={1.6} color="#ffe1ad" />
+        {/* Luz quente e baixa, do sol nascendo no horizonte */}
+        <directionalLight position={[-6, 6, 7]} intensity={1.7} color="#ffcf94" />
         <ChurchModel count={count} materialRef={materialRef} onReady={onChurchReady} />
       </Suspense>
     </>

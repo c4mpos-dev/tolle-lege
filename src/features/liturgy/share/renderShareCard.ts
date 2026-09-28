@@ -14,7 +14,7 @@ export type ShareCardOptions = {
   theme: ShareTheme
 }
 
-const SERIF = '"Fraunces Variable", Georgia, serif'
+const SERIF = '"EB Garamond Variable", Georgia, serif'
 const SANS = '"Inter Variable", system-ui, sans-serif'
 
 /** Mesmos traços da marca do site (viewBox 32×32). */

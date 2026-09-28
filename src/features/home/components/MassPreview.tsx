@@ -16,7 +16,7 @@ export function MassPreview() {
 
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="flex items-center justify-center gap-2 text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+          <p className="flex items-center justify-center gap-2 rubric text-primary">
             <Rosette className="size-4" />A Missa
           </p>
           <h2 className="mt-3 font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl">

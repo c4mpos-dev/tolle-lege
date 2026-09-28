@@ -1,4 +1,4 @@
-const FONT = '500 220px "Fraunces Variable"'
+const FONT = '500 220px "EB Garamond Variable"'
 
 /**
  * Sorteia `count` pontos dentro das letras de `text`, desenhado com a fonte do site.

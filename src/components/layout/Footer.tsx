@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { CrossPattee } from '@/components/ui/CrossPattee'
 import { navGroups } from '@/config/routes'
 import { Logo } from './Logo'
 
@@ -6,12 +7,16 @@ export function Footer() {
   return (
     <footer className="bg-ink text-canvas/80">
       {/* Faixa de "vitral" no topo do rodapé */}
-      <div aria-hidden className="h-1.5 bg-linear-to-r from-marian via-primary to-terracotta" />
+      <div aria-hidden className="flex items-center gap-4 px-6 pt-10 text-primary lg:px-10">
+        <span className="h-px flex-1 bg-linear-to-r from-transparent to-primary/40" />
+        <CrossPattee className="size-4" />
+        <span className="h-px flex-1 bg-linear-to-l from-transparent to-primary/40" />
+      </div>
 
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[2fr_3fr] lg:px-10">
         <div className="max-w-md">
           <Logo className="text-canvas" />
-          <p className="mt-6 font-serif text-lg text-canvas/90 italic">
+          <p className="mt-6 font-serif text-xl text-canvas/90 italic">
             “Fizeste-nos para ti, Senhor, e inquieto está o nosso coração enquanto não repousa em
             ti.”
           </p>
@@ -21,7 +26,7 @@ export function Footer() {
         <nav aria-label="Rodapé" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {navGroups.map((group) => (
             <div key={group.label}>
-              <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+              <p className="rubric text-primary">
                 {group.label}
               </p>
               <ul className="mt-4 space-y-3">

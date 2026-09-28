@@ -19,7 +19,7 @@ export function PageHeader({ eyebrow, title, description, glassSeed = 3, childre
       <LightRays />
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-14 sm:py-20 md:grid-cols-[1fr_auto] lg:px-10">
         <div className="max-w-2xl">
-          <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.25em] text-primary-strong uppercase">
+          <p className="flex items-center gap-2 rubric text-primary-strong">
             <Rosette className="size-4 text-primary" />
             {eyebrow}
           </p>

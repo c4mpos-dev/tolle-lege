@@ -1,42 +1,54 @@
 /* Limita o scan de classes ao src/ (evita varrer public/models/*.glb) */
 @import 'tailwindcss' source('../');
 
-/* Fontes self-hosted. Fraunces com o eixo SOFT (serifas arredondadas). */
-@import '@fontsource-variable/fraunces/soft.css';
-@import '@fontsource-variable/fraunces/soft-italic.css';
+/* Fontes self-hosted. EB Garamond: a serifada clássica dos missais e livros antigos. */
+@import '@fontsource-variable/eb-garamond/wght.css';
+@import '@fontsource-variable/eb-garamond/wght-italic.css';
 @import '@fontsource-variable/inter';
 
+/* Tela larga e deitada: a hero vira um tríptico, com a igreja no centro. Igual a HERO_WIDE_QUERY. */
+@custom-variant wide (@media (min-width: 1024px) and (min-aspect-ratio: 105/100));
+
 /*
- * Tokens de design — conceito "igreja caiada ao sol da manhã".
+ * Tokens de design — conceito "missal antigo": pergaminho, papel, tinta sépia e ouro.
  * Nomes semânticos: ao trocar de design system, só os valores mudam.
- * Regra de proporção: ~80% canvas/surface, ~15% ink, ~5% cor.
+ * Regra de proporção: ~80% pergaminho/papel, ~15% tinta, ~5% cor.
  */
 @theme {
   /* Neutros */
-  --color-canvas: #fbf8f3; /* cal — fundo geral */
-  --color-surface: #f3eee6; /* linho — seções alternadas */
-  --color-line: #e6ddd0; /* bordas e divisores */
-  --color-ink: #2b2622; /* texto principal */
-  --color-ink-muted: #6b625a; /* texto secundário */
+  --color-parchment: #e8e1cf; /* pergaminho — fundo da página */
+  --color-canvas: #faf7f0; /* papel — cartões e painéis */
+  --color-surface: #ddd4bf; /* pergaminho escuro — seções alternadas */
+  --color-line: #cfc3a8; /* bordas e divisores */
+  --color-ink: #2a221b; /* tinta sépia — texto principal */
+  --color-ink-muted: #5f5347; /* texto secundário */
 
-  /* Primária: ouro envelhecido. Use -strong para texto (contraste AA). */
-  --color-primary: #b08d57;
-  --color-primary-strong: #8a6a35;
-  --color-primary-soft: #f3eadb;
+  /* Primária: ouro velho. Use -strong para texto (contraste AA). */
+  --color-primary: #a8823f;
+  --color-primary-strong: #74561f;
+  --color-primary-soft: #efe3c8;
+
+  /* Púrpura cardinalícia: fios e detalhes, com parcimônia */
+  --color-cardinal: #7a1f26;
 
   /* Acentos por área */
-  --color-marian: #4a6b94; /* dúvidas */
-  --color-marian-soft: #e3eaf3;
-  --color-terracotta: #c9725b; /* curiosidades */
-  --color-terracotta-soft: #f6e4de;
-  --color-sage: #5f7f63; /* primeiros passos */
-  --color-sage-soft: #e5ede4;
-  --color-rose: #b3334e; /* Novena das Rosas */
-  --color-rose-soft: #f8e3e7;
+  --color-marian: #3f5f86; /* dúvidas */
+  --color-marian-soft: #dde4ec;
+  --color-terracotta: #b5634c; /* curiosidades */
+  --color-terracotta-soft: #f0ddd4;
+  --color-sage: #56735a; /* primeiros passos */
+  --color-sage-soft: #dfe7dc;
+  --color-rose: #a52d47; /* Novena das Rosas */
+  --color-rose-soft: #f3dde2;
+
+  /* Cantos retos, como páginas e molduras (arcos continuam com rounded-full) */
+  --radius-lg: 0.1875rem;
+  --radius-xl: 0.25rem;
+  --radius-2xl: 0.25rem;
+  --radius-3xl: 0.375rem;
 
   /* Tipografia */
-  --font-serif: 'Fraunces Variable', ui-serif, Georgia, serif;
-  --font-serif--font-variation-settings: 'SOFT' 50;
+  --font-serif: 'EB Garamond Variable', ui-serif, Georgia, serif;
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 
   /* Animações */
@@ -78,10 +90,28 @@
   }
 
   body {
-    @apply bg-canvas font-sans text-ink antialiased;
+    @apply bg-parchment font-sans text-ink antialiased;
+  }
+
+  /* Grão de papel sobre toda a página, bem sutil */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.18 0 0 0 0 0.1 0 0 0 1.4 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   ::selection {
     @apply bg-primary-soft text-ink;
+  }
+}
+
+@layer components {
+  /* Rubrica: rótulo em versaletes, como os títulos de seção dos missais */
+  .rubric {
+    @apply font-serif text-sm font-semibold tracking-[0.28em] uppercase;
   }
 }

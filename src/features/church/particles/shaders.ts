@@ -81,9 +81,10 @@ export const vertexShader = /* glsl */ `
     // Texto e igreja têm tamanhos próprios de ponto (o texto varia com a largura da tela).
     gl_PointSize = mix(uSize, uChurchSize, morph) * uPixelRatio * (0.55 + aRandom.x * 0.9) / -mv.z;
 
-    // Dourado no texto; cores do modelo na igreja
-    vColor = mix(vec3(0.93, 0.76, 0.42), aColor, morph);
-    vAlpha = (0.55 + 0.45 * (0.5 + 0.5 * sin(uTime * 1.7 + aRandom.y * 60.0))) * mix(1.0, 0.85, morph)
+    // Tinta no papel: sépia com pontos de ouro no texto; cores do modelo, escurecidas, na igreja
+    vec3 ink = mix(vec3(0.3, 0.2, 0.12), vec3(0.66, 0.49, 0.22), step(0.62, aRandom.w));
+    vColor = mix(ink, aColor * 0.55, morph);
+    vAlpha = (0.6 + 0.4 * (0.5 + 0.5 * sin(uTime * 1.7 + aRandom.y * 60.0))) * mix(0.85, 0.7, morph)
       * mix(1.0 - uFade, 1.0, survivor);
   }
 `

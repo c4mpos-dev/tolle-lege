@@ -29,7 +29,7 @@ export function SacramentsPage() {
 
       <section className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
         <Reveal className="rounded-3xl bg-ink p-8 text-canvas sm:p-10">
-          <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+          <p className="rubric text-primary">
             O que é um sacramento?
           </p>
           <blockquote className="mt-4 font-serif text-2xl leading-snug text-balance sm:text-3xl">

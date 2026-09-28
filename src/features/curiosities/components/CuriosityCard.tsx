@@ -34,7 +34,7 @@ export function CuriosityCard({ curiosity }: { curiosity: Curiosity }) {
           className={`absolute inset-0 flex flex-col overflow-hidden rounded-3xl p-7 backface-hidden ${tone.front}`}
         >
           <Rosette aria-hidden className="absolute -right-10 -bottom-10 size-48 opacity-15" />
-          <span className="text-xs font-semibold tracking-[0.25em] uppercase opacity-80">
+          <span className="rubric opacity-80">
             Você sabia?
           </span>
           <p className="mt-auto font-serif text-2xl leading-snug font-medium text-balance">

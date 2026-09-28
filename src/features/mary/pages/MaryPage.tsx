@@ -56,7 +56,7 @@ export function MaryPage() {
         <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,rgb(255_255_255/0.18),transparent_60%)]" />
         <div className="mx-auto max-w-3xl px-6 text-center">
           <Reveal>
-            <p className="text-xs font-semibold tracking-[0.25em] text-canvas/70 uppercase">O cântico de Maria</p>
+            <p className="rubric text-canvas/70">O cântico de Maria</p>
             <blockquote className="mt-6 space-y-1 font-serif text-2xl leading-snug text-balance italic sm:text-3xl">
               {magnificat.map((line) => (
                 <p key={line}>{line}</p>
@@ -133,7 +133,7 @@ export function MaryPage() {
       <section id="aparicoes" className="scroll-mt-20 bg-ink py-16 text-canvas sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
-            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Pelo mundo</p>
+            <p className="rubric text-primary">Pelo mundo</p>
             <h2 className="mt-3 font-serif text-4xl font-medium tracking-tight sm:text-5xl">Aparições e devoções</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-canvas/70">
               A Igreja reconhece algumas aparições como dignas de fé. Elas são chamadas de
@@ -184,7 +184,7 @@ export function MaryPage() {
         </Reveal>
 
         <Reveal delay={0.08} className="self-start rounded-3xl bg-marian-soft p-8 sm:p-10">
-          <p className="text-xs font-semibold tracking-[0.25em] text-marian uppercase">Rezar com Maria</p>
+          <p className="rubric text-marian">Rezar com Maria</p>
           <h2 className="mt-3 font-serif text-3xl font-medium text-ink">Ela sempre leva a Jesus</h2>
           <p className="mt-4 leading-relaxed text-ink/80">
             Toda devoção mariana verdadeira termina em Cristo. As orações mais tradicionais para

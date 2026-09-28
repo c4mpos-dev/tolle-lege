@@ -34,5 +34,5 @@ export function RootLayout({ children }: { children?: ReactNode }) {
 
 /** Exibido enquanto a primeira página (carregada sob demanda) é baixada. */
 export function PageFallback() {
-  return <div className="min-h-dvh bg-canvas" />
+  return <div className="min-h-dvh bg-parchment" />
 }

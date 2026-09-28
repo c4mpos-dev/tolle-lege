@@ -119,7 +119,7 @@ export function RoseNovenaPage() {
       <section className="bg-ink py-16 text-canvas sm:py-24">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-2">
           <Reveal>
-            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Sobre a novena</p>
+            <p className="rubric text-primary">Sobre a novena</p>
             <h2 className="mt-3 font-serif text-4xl font-medium tracking-tight">Por que rosas?</h2>
             <div className="mt-6 space-y-4 leading-relaxed text-canvas/80">
               <p>
@@ -139,7 +139,7 @@ export function RoseNovenaPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Como rezar</p>
+            <p className="rubric text-primary">Como rezar</p>
             <ol className="mt-6 space-y-4">
               {howToPray.map((step, index) => (
                 <li key={step} className="flex gap-4">
