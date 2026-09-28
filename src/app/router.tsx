@@ -75,6 +75,10 @@ export const router = createBrowserRouter([
         path: routes.mary,
         lazy: () => import('@/features/mary').then((m) => ({ Component: m.MaryPage })),
       },
+      {
+        path: routes.tour,
+        lazy: () => import('@/features/tour').then((m) => ({ Component: m.TourPage })),
+      },
       { path: '*', Component: NotFoundPage },
     ],
   },

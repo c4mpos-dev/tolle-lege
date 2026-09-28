@@ -5,6 +5,7 @@ import {
   Church,
   Droplets,
   HandHeart,
+  Footprints,
   Lightbulb,
   MessageCircleQuestion,
   Rose,
@@ -32,6 +33,7 @@ export const routes = {
   trinity: '/trinity',
   roseNovena: '/rose-novena',
   mary: '/mary',
+  tour: '/tour',
 } as const
 
 export type NavItem = {
@@ -73,6 +75,12 @@ export const navGroups: NavGroup[] = [
   {
     label: 'Aprender',
     items: [
+      {
+        label: 'Visita guiada',
+        to: routes.tour,
+        description: 'Uma igreja por dentro e por fora',
+        icon: Footprints,
+      },
       {
         label: 'A Missa',
         to: routes.mass,
