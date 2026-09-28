@@ -71,6 +71,10 @@ export const router = createBrowserRouter([
         path: routes.roseNovena,
         lazy: () => import('@/features/rose-novena').then((m) => ({ Component: m.RoseNovenaPage })),
       },
+      {
+        path: routes.mary,
+        lazy: () => import('@/features/mary').then((m) => ({ Component: m.MaryPage })),
+      },
       { path: '*', Component: NotFoundPage },
     ],
   },

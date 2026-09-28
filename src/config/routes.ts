@@ -10,6 +10,7 @@ import {
   Rose,
   Route,
   Sparkles,
+  Star,
   Triangle,
   type LucideIcon,
 } from 'lucide-react'
@@ -30,6 +31,7 @@ export const routes = {
   glossary: '/glossary',
   trinity: '/trinity',
   roseNovena: '/rose-novena',
+  mary: '/mary',
 } as const
 
 export type NavItem = {
@@ -82,6 +84,12 @@ export const navGroups: NavGroup[] = [
         to: routes.trinity,
         description: 'Um só Deus em três Pessoas',
         icon: Triangle,
+      },
+      {
+        label: 'Maria',
+        to: routes.mary,
+        description: 'A Mãe de Jesus e da Igreja',
+        icon: Star,
       },
       {
         label: 'Sacramentos',
