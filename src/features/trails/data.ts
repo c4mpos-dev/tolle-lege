@@ -39,7 +39,7 @@ export const trails: Trail[] = [
     description:
       'Conheça o caminho do catecumenato e como dar os primeiros passos rumo ao Batismo.',
     audience:
-      'Jovens e adultos que nunca foram batizados, em nenhuma igreja cristã, e desejam conhecer a fé ou receber o Batismo.',
+      'Jovens e adultos que nunca foram batizados, em nenhuma igreja cristã, e desejam conhecer a fé ou receber o Batismo. (Para crianças, converse com a paróquia: o caminho é adaptado à idade.)',
     intro: [
       'A Igreja tem um caminho próprio para adultos que desejam ser batizados: a iniciação cristã, descrita no Ritual da Iniciação Cristã de Adultos (RICA). Ninguém faz esse caminho sozinho: a comunidade, os catequistas e um padrinho ou madrinha acompanham cada passo.',
       'Não há pressa. O tempo de cada etapa respeita o amadurecimento da fé de cada pessoa.',
@@ -65,27 +65,28 @@ export const trails: Trail[] = [
       {
         title: 'Procure uma paróquia',
         body: [
-          'A porta de entrada é a paróquia mais próxima da sua casa. Vá à secretaria paroquial e diga, simplesmente, que é adulto, não é batizado e gostaria de se preparar para o Batismo.',
-          'Você será encaminhado à catequese de adultos (também chamada de catequese com adultos ou de iniciação cristã). Em algumas paróquias, primeiro há uma conversa com o padre ou com um catequista.',
+          'A porta de entrada é a paróquia mais próxima ou de mais fácil acesso para você. Vá à secretaria paroquial e diga, simplesmente, que é adulto, não é batizado e gostaria de se preparar para o Batismo.',
+          'Para quem não é batizado, o caminho próprio é o catecumenato. Em algumas paróquias, primeiro há uma conversa com o padre ou com um catequista. A forma de acolher varia de lugar para lugar: siga as orientações da sua paróquia.',
         ],
         tips: [
-          'Leve um documento de identidade. Não é preciso levar mais nada no primeiro contato.',
+          'No primeiro contato, geralmente basta um documento de identidade. A secretaria vai informar quais documentos serão necessários depois.',
+          'Muitas paróquias reúnem, num mesmo grupo de Iniciação à Vida Cristã, os adultos não batizados e os batizados que ainda vão fazer a Primeira Eucaristia ou a Crisma. Mesmo assim, só quem não é batizado é catecúmeno e passa pelos ritos próprios do catecumenato.',
           'Se a sua paróquia não tiver turma aberta, pergunte qual paróquia vizinha tem.',
           'Se você vive uma situação familiar complexa, como uma segunda união, converse abertamente com o padre desde o início. Isso não é motivo para desistir: há caminhos para cada caso.',
         ],
         practice:
-          'Descubra o horário da secretaria da paróquia mais próxima e faça uma visita ou ligação nesta semana.',
+          'Descubra o horário da secretaria da paróquia mais próxima ou de mais fácil acesso para você, e faça uma visita ou ligação nesta semana.',
       },
       {
         title: 'As etapas do caminho',
         body: [
           'O Ritual prevê quatro tempos. Primeiro, o pré-catecumenato: um tempo de primeiro anúncio, para conhecer Jesus e decidir seguir adiante. Depois, o catecumenato propriamente dito: formação na fé, na oração e na vida cristã, que começa com um rito de entrada celebrado com a comunidade.',
           'Quando a pessoa está preparada, vem o tempo da purificação e iluminação, que normalmente coincide com a Quaresma. Ele começa com o rito da eleição (a “inscrição do nome”) e inclui os escrutínios, orações especiais celebradas nas Missas de domingo, e as entregas do Credo e do Pai-Nosso.',
-          'Por fim, depois dos sacramentos, vem a mistagogia: um tempo, durante a Páscoa, para aprofundar o que foi vivido.',
+          'Por fim, depois dos sacramentos, vem a mistagogia: um tempo, durante o Tempo Pascal, para aprofundar o que foi vivido.',
         ],
         tips: [
-          'A duração varia conforme a paróquia e o caminho de cada um. O próprio Ritual admite que o catecumenato pode se estender por anos, se for necessário.',
-          'Os catecúmenos já são considerados parte da família da Igreja (Catecismo, § 1249), mesmo antes do Batismo.',
+          'A duração e a forma de cada etapa variam conforme a paróquia e o caminho de cada um. O próprio Ritual admite que o catecumenato pode se estender por anos, se for necessário.',
+          'Mesmo antes do Batismo, os catecúmenos “já estão unidos à Igreja” e pertencem à casa de Cristo (Catecismo, § 1249).',
         ],
         practice:
           'Pergunte ao seu catequista em qual etapa você está e o que se espera de você nesse tempo.',
@@ -96,9 +97,9 @@ export const trails: Trail[] = [
           'O padrinho ou a madrinha acompanha o catecúmeno durante a preparação, apresenta-o à comunidade e continua ajudando depois do Batismo. É alguém que testemunha a fé com a própria vida.',
         ],
         tips: [
-          'Pelo Código de Direito Canônico (cân. 874), o padrinho precisa ser católico, já ter recebido Batismo, Crisma e Eucaristia, levar uma vida de fé coerente e ter pelo menos 16 anos (a diocese pode definir outra idade).',
+          'Pelo Código de Direito Canônico (cân. 874), o padrinho ou a madrinha precisa ser católico, já ter recebido Batismo, Crisma e Eucaristia, levar uma vida de fé coerente e ter pelo menos 16 anos (o bispo diocesano pode definir outra idade).',
           'O pai ou a mãe do batizando não podem ser padrinhos.',
-          'Basta um padrinho ou uma madrinha; também podem ser dois, um homem e uma mulher.',
+          'Basta um padrinho ou uma madrinha; também podem ser dois, um homem e uma mulher. Cada diocese pode ter orientações e documentos próprios: confirme na secretaria.',
         ],
         practice:
           'Pense em alguém de fé que você admira e converse com essa pessoa sobre o convite.',
@@ -168,7 +169,7 @@ export const trails: Trail[] = [
       {
         title: 'A porta está aberta',
         body: [
-          'Jesus contou a história de um filho que pediu sua herança, saiu de casa e desperdiçou tudo. Quando decidiu voltar, preparou um discurso de arrependimento. Mas o pai correu ao seu encontro antes que ele terminasse de falar.',
+          'Jesus contou a história de um filho que pediu sua herança, saiu de casa e desperdiçou tudo. Quando decidiu voltar, preparou um discurso de arrependimento. Mas o pai, que o viu ainda de longe, correu ao seu encontro e o abraçou, e nem o deixou terminar de falar.',
           'É assim que Deus recebe quem retorna: sem cobranças, com festa. Você não precisa se explicar para ninguém para voltar a entrar numa igreja.',
         ],
         scripture: {
@@ -181,10 +182,10 @@ export const trails: Trail[] = [
         title: 'Volte à Missa de domingo',
         body: [
           'O domingo é o dia da Ressurreição de Jesus, e a Missa dominical é o coração da vida católica. Comece por ela, mesmo que ainda não se sinta pronto para comungar: participar já é voltar.',
-          'Se faz muito tempo, algumas respostas podem ter mudado. Desde 2023 as paróquias do Brasil usam uma nova tradução do Missal. Acompanhe a comunidade, sem medo de errar.',
+          'Se faz muito tempo, algumas respostas podem ter mudado: desde o Advento de 2023, as paróquias do Brasil usam a nova tradução do Missal Romano. Acompanhe a comunidade, sem medo de errar.',
         ],
         tips: [
-          'Enquanto não se confessar, se tiver consciência de pecado grave, não comungue: permaneça no banco rezando. Isso é perfeitamente normal.',
+          'Se tiver consciência de pecado grave, não comungue antes de se confessar: permaneça no banco rezando. Isso é perfeitamente normal.',
           'Para comungar, faça jejum de uma hora antes (água e remédios não quebram o jejum).',
         ],
         practice: 'Escolha uma paróquia e um horário de Missa para o próximo domingo.',
@@ -194,7 +195,7 @@ export const trails: Trail[] = [
         title: 'Faça uma boa Confissão',
         body: [
           'O sacramento da Reconciliação é o grande passo de volta. Nele, Deus perdoa os pecados por meio do sacerdote, e você sai com a certeza do perdão.',
-          'Prepare-se com um exame de consciência. Na Confissão, diga há quanto tempo não se confessa e conte os pecados graves que lembrar, com a quantidade aproximada. Se for difícil, diga ao padre: ele vai conduzir você.',
+          'Prepare-se com um exame de consciência. Na Confissão, diga há quanto tempo não se confessa e conte os pecados graves que lembrar, com o número aproximado de vezes. Se for difícil, diga ao padre: ele vai conduzir você.',
         ],
         scripture: {
           reference: '1Jo 1,9',
@@ -202,7 +203,7 @@ export const trails: Trail[] = [
         },
         tips: [
           'O padre é obrigado a guardar sigilo absoluto sobre tudo o que ouve, sem nenhuma exceção.',
-          'Pecados esquecidos sem culpa também são perdoados. Se lembrar deles depois, basta mencioná-los na próxima Confissão.',
+          'Pecados esquecidos sem culpa também são perdoados. Se lembrar depois de algum pecado grave, basta mencioná-lo na próxima Confissão.',
           'Muitas paróquias têm horários fixos de Confissão; em outras, é preciso marcar.',
         ],
         practice:
@@ -213,10 +214,11 @@ export const trails: Trail[] = [
         title: 'Complete a sua iniciação',
         body: [
           'Muita gente foi batizada quando criança, mas não fez a Primeira Eucaristia ou a Crisma. Nunca é tarde: as paróquias oferecem catequese de adultos justamente para completar a iniciação cristã.',
-          'A Crisma, em especial, costuma ser pedida para ser padrinho ou madrinha e para o casamento na Igreja.',
+          'A Crisma é exigida para ser padrinho ou madrinha e é pedida, sempre que possível, antes do casamento na Igreja.',
         ],
         tips: [
-          'Leve a sua certidão de Batismo. Se não tiver, a paróquia onde você foi batizado pode emitir uma segunda via.',
+          'Como você já é batizado, não faz o catecumenato (que é para quem ainda não recebeu o Batismo): faz a catequese de adultos, que muitas paróquias chamam de Iniciação à Vida Cristã.',
+          'Leve a sua certidão de Batismo. Se não tiver, a paróquia onde aconteceu o seu Batismo pode emitir uma segunda via.',
         ],
         practice:
           'Pergunte na secretaria paroquial sobre a catequese de adultos para Primeira Eucaristia ou Crisma.',
@@ -225,12 +227,13 @@ export const trails: Trail[] = [
       {
         title: 'Se a sua situação de casamento for delicada',
         body: [
-          'Se você é casado só no civil, é possível regularizar a união celebrando o sacramento do Matrimônio. Muitas paróquias fazem inclusive casamentos comunitários.',
-          'Se você está numa segunda união depois de um divórcio, converse com um padre. A Igreja tem o processo de declaração de nulidade, que avalia se o primeiro casamento foi válido desde o início. Ele ficou mais simples e acessível desde 2015.',
+          'Se você é casado só no civil e nenhum dos dois tem um casamento anterior na Igreja, normalmente é possível regularizar a união celebrando o sacramento do Matrimônio. Muitas paróquias fazem inclusive casamentos comunitários.',
+          'Se você está numa segunda união depois de um divórcio, converse com um padre. A Igreja tem o processo de declaração de nulidade, que avalia se o primeiro casamento foi válido desde o início. Desde 2015, ele ficou mais simples e acessível.',
           'Qualquer que seja a sua situação, você continua sendo parte da Igreja e é chamado a participar da Missa, rezar e viver a comunidade.',
         ],
         tips: [
-          'Quem vive uma segunda união, sem a nulidade do primeiro casamento, normalmente não recebe a Comunhão. Isso não significa exclusão da comunidade; converse com o padre sobre o seu caso.',
+          'Quem vive uma segunda união, sem a nulidade do primeiro casamento, normalmente não recebe a Comunhão. Isso não significa exclusão da comunidade.',
+          'Situações de casamento são sempre muito particulares. Nada aqui substitui a conversa com o padre, que vai olhar a sua história com atenção e cuidado.',
         ],
         practice: 'Se esse for o seu caso, marque uma conversa com o padre da sua paróquia.',
       },
@@ -269,7 +272,7 @@ export const trails: Trail[] = [
         title: 'O que você já traz',
         body: [
           'Se você foi batizado em outra igreja cristã com água e com as palavras “em nome do Pai, e do Filho e do Espírito Santo”, a Igreja Católica reconhece esse Batismo como válido. Ele não é repetido.',
-          'Se houver dúvida real sobre como o Batismo foi feito, a Igreja pode celebrar um Batismo “sob condição”.',
+          'Cada caso é analisado pela paróquia. Se houver dúvida real sobre como o Batismo foi feito, a Igreja pode celebrar um Batismo “sob condição”.',
           'Se você vem de uma religião não cristã, ou foi batizado num grupo que não professa a Santíssima Trindade, o caminho é o catecumenato, o mesmo de quem não é batizado.',
         ],
         tips: [
@@ -328,7 +331,7 @@ export const trails: Trail[] = [
         body: [
           'Os católicos não adoram Maria nem os santos: a adoração é devida somente a Deus. Maria e os santos são venerados, isto é, honrados como exemplos de quem viveu o Evangelho.',
           'Pedir a intercessão de um santo é como pedir que um amigo reze por você, só que um amigo que já está junto de Deus.',
-          'Sobre Maria, a Igreja proclama quatro dogmas: ela é Mãe de Deus (Concílio de Éfeso, ano 431), sempre virgem, concebida sem pecado (Imaculada Conceição, 1854) e elevada ao céu de corpo e alma (Assunção, 1950).',
+          'Sobre Maria, a Igreja proclama quatro dogmas: ela é Mãe de Deus (Concílio de Éfeso, ano 431), sempre virgem, concebida sem o pecado original (Imaculada Conceição, 1854) e elevada ao céu de corpo e alma (Assunção, 1950).',
         ],
         scripture: {
           reference: 'Lc 1,48',
@@ -341,7 +344,7 @@ export const trails: Trail[] = [
         title: 'O Papa e a Igreja',
         body: [
           'A Igreja entende que Jesus confiou a Pedro uma missão especial entre os apóstolos, e que os bispos são os sucessores dos apóstolos. O Papa, bispo de Roma, é o sucessor de Pedro e sinal da unidade da Igreja.',
-          'A infalibilidade do Papa é muitas vezes mal entendida: ela não significa que ele não erre ou não peque. Vale apenas quando ele define solenemente uma verdade de fé ou de moral para toda a Igreja, algo que acontece muito raramente.',
+          'A infalibilidade do Papa é muitas vezes mal entendida: ela não significa que ele não erre ou não peque. Vale apenas quando ele define solenemente (“ex cathedra”) uma verdade de fé ou de moral para toda a Igreja, algo que acontece muito raramente.',
         ],
         scripture: {
           reference: 'Mt 16,18',
@@ -356,10 +359,10 @@ export const trails: Trail[] = [
           'Na mesma celebração, ou pouco depois, recebe a Crisma e a Eucaristia. Antes, normalmente, faz a sua primeira Confissão.',
         ],
         tips: [
-          'Cristãos ortodoxos já têm sacramentos válidos, inclusive a Crisma. Para eles, o caminho costuma ser ainda mais simples; converse com o padre.',
-          'O primeiro passo é sempre uma conversa com o padre ou com a catequese de adultos da paróquia.',
+          'Cristãos ortodoxos já têm sacramentos válidos, inclusive a Crisma. Para eles, o caminho costuma ser ainda mais simples.',
+          'Cada história é diferente, e o caminho é ajustado a ela. Por isso, o primeiro passo é sempre uma conversa com o padre ou com a catequese de adultos da paróquia.',
         ],
-        practice: 'Marque uma conversa com o padre da paróquia mais próxima.',
+        practice: 'Marque uma conversa com o padre da paróquia mais próxima ou de mais fácil acesso para você.',
       },
     ],
   },
@@ -420,7 +423,7 @@ export const trails: Trail[] = [
         title: 'Visite uma Missa',
         body: [
           'Qualquer pessoa pode assistir a uma Missa, sem compromisso. Basta chegar, sentar e acompanhar; ninguém vai pedir explicações.',
-          'Só a Comunhão é reservada aos católicos. Durante esse momento, é só permanecer no lugar.',
+          'Só a Comunhão é reservada aos católicos que estão preparados para recebê-la. Durante esse momento, é só permanecer no lugar.',
         ],
         scripture: {
           reference: 'Sl 34(33),9',
