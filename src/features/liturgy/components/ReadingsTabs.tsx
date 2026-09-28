@@ -60,9 +60,9 @@ export function ReadingsTabs({ liturgy }: { liturgy: Liturgy }) {
       >
         {/* key reinicia a opção selecionada ao trocar de aba */}
         {current.kind === 'psalm' ? (
-          <ReadingView key={active} kind="psalm" options={current.options} />
+          <ReadingView key={active} kind="psalm" options={current.options} date={liturgy.data} color={liturgy.cor} />
         ) : (
-          <ReadingView key={active} kind="reading" options={current.options} />
+          <ReadingView key={active} kind="reading" options={current.options} date={liturgy.data} color={liturgy.cor} />
         )}
       </div>
     </div>

@@ -1,14 +1,19 @@
+import { ImageDown } from 'lucide-react'
 import { useState } from 'react'
-import type { Psalm, Reading } from '../types'
+import type { LiturgicalColor, Psalm, Reading } from '../types'
 import { formatVerses } from '../utils/verses'
+import { ShareImageDialog } from './ShareImageDialog'
 
-type ReadingViewProps =
-  | { kind: 'reading'; options: Reading[] }
-  | { kind: 'psalm'; options: Psalm[] }
+/** Dados do dia, usados na imagem de compartilhamento. */
+type DayInfo = { date: string; color: LiturgicalColor }
+
+type ReadingViewProps = DayInfo &
+  ({ kind: 'reading'; options: Reading[] } | { kind: 'psalm'; options: Psalm[] })
 
 /** Mostra uma leitura ou salmo. Quando há mais de uma opção (ex.: forma longa/breve), permite alternar. */
-export function ReadingView({ kind, options }: ReadingViewProps) {
+export function ReadingView({ kind, options, date, color }: ReadingViewProps) {
   const [selected, setSelected] = useState(0)
+  const [sharing, setSharing] = useState(false)
   const current = options[selected] ?? options[0]
 
   return (
@@ -29,15 +34,29 @@ export function ReadingView({ kind, options }: ReadingViewProps) {
         </div>
       )}
 
-      <header className="mb-6">
-        {'titulo' in current && (
-          <h3 className="font-serif text-2xl font-medium text-ink">{current.titulo}</h3>
-        )}
-        <p className="mt-1 text-sm font-medium text-primary-strong">
-          {kind === 'psalm' && 'Salmo responsorial · '}
-          {current.referencia}
-        </p>
+      <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          {'titulo' in current && (
+            <h3 className="font-serif text-2xl font-medium text-ink">{current.titulo}</h3>
+          )}
+          <p className="mt-1 text-sm font-medium text-primary-strong">
+            {kind === 'psalm' && 'Salmo responsorial · '}
+            {current.referencia}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setSharing(true)}
+          className="inline-flex shrink-0 items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-primary hover:bg-primary-soft"
+        >
+          <ImageDown className="size-4" />
+          Criar imagem
+        </button>
       </header>
+
+      {sharing && (
+        <ShareImageDialog item={current} date={date} color={color} onClose={() => setSharing(false)} />
+      )}
 
       {'refrao' in current && (
         <p className="mb-6 rounded-lg bg-primary-soft px-4 py-3 font-serif text-lg text-ink/80 italic">
