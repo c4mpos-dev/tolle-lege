@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 import { routes } from '@/config/routes'
 import { useLiturgy } from '../hooks/useLiturgy'
+import { ShareImageButton } from './ShareImageButton'
 import { liturgicalColorClass } from '../utils/colors'
 import { formatLongDate } from '../utils/date'
 
@@ -53,9 +54,14 @@ export function LiturgyTodayCard() {
         </>
       )}
 
-      <ButtonLink to={routes.liturgy} variant="text" className="mt-8">
-        Ler a liturgia completa
-      </ButtonLink>
+      <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+        {data?.leituras.evangelho[0] && (
+          <ShareImageButton item={data.leituras.evangelho[0]} date={data.data} color={data.cor} />
+        )}
+        <ButtonLink to={routes.liturgy} variant="text">
+          Ler a liturgia completa
+        </ButtonLink>
+      </div>
     </article>
   )
 }

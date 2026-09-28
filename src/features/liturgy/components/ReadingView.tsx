@@ -1,8 +1,7 @@
-import { ImageDown } from 'lucide-react'
 import { useState } from 'react'
 import type { LiturgicalColor, Psalm, Reading } from '../types'
 import { formatVerses } from '../utils/verses'
-import { ShareImageDialog } from './ShareImageDialog'
+import { ShareImageButton } from './ShareImageButton'
 
 /** Dados do dia, usados na imagem de compartilhamento. */
 type DayInfo = { date: string; color: LiturgicalColor }
@@ -13,7 +12,6 @@ type ReadingViewProps = DayInfo &
 /** Mostra uma leitura ou salmo. Quando há mais de uma opção (ex.: forma longa/breve), permite alternar. */
 export function ReadingView({ kind, options, date, color }: ReadingViewProps) {
   const [selected, setSelected] = useState(0)
-  const [sharing, setSharing] = useState(false)
   const current = options[selected] ?? options[0]
 
   return (
@@ -44,19 +42,13 @@ export function ReadingView({ kind, options, date, color }: ReadingViewProps) {
             {current.referencia}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setSharing(true)}
-          className="inline-flex shrink-0 items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-primary hover:bg-primary-soft"
-        >
-          <ImageDown className="size-4" />
-          Criar imagem
-        </button>
+        <div className="relative shrink-0">
+          <ShareImageButton item={current} date={date} color={color} />
+          <span className="pointer-events-none absolute -top-2 -right-2 rounded-full bg-primary px-1.5 py-0.5 text-[0.6rem] font-bold tracking-wide text-canvas uppercase">
+            Novo
+          </span>
+        </div>
       </header>
-
-      {sharing && (
-        <ShareImageDialog item={current} date={date} color={color} onClose={() => setSharing(false)} />
-      )}
 
       {'refrao' in current && (
         <p className="mb-6 rounded-lg bg-primary-soft px-4 py-3 font-serif text-lg text-ink/80 italic">

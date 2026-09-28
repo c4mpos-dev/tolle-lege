@@ -2,6 +2,7 @@ import { LiturgyNotFoundError } from '../api/getLiturgy'
 import { useLiturgy } from '../hooks/useLiturgy'
 import { liturgicalColorClass } from '../utils/colors'
 import { ReadingsTabs } from './ReadingsTabs'
+import { SharePromo } from './SharePromo'
 
 /** Liturgia completa de uma data: título, cor, oração do dia e leituras. */
 export function LiturgyReader({ date }: { date: Date }) {
@@ -50,6 +51,10 @@ export function LiturgyReader({ date }: { date: Date }) {
           {data.oracoes.coleta}
         </blockquote>
       </figure>
+
+      <div className="mt-8">
+        <SharePromo liturgy={data} />
+      </div>
 
       <div className="mt-8 rounded-2xl border border-line bg-canvas p-5 sm:p-10">
         <ReadingsTabs liturgy={data} />
