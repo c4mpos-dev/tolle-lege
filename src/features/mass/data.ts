@@ -125,7 +125,7 @@ export const massParts: MassPart[] = [
       {
         title: 'Profissão de fé (Creio)',
         description: 'Toda a assembleia proclama junta aquilo em que a Igreja crê.',
-        why: 'Depois de ouvir a Palavra, a assembleia responde com a fé da Igreja de todos os tempos. O Creio da Missa é o Niceno-Constantinopolitano, formulado nos concílios do século IV.',
+        why: 'Depois de ouvir a Palavra, a assembleia responde com a fé da Igreja de todos os tempos. Normalmente se reza o Credo Niceno-Constantinopolitano, formulado nos concílios do século IV; também é permitido o Símbolo dos Apóstolos, mais curto.',
         posture: 'stand',
         sundaysOnly: true,
       },
