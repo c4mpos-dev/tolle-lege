@@ -20,7 +20,7 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 /**
  * "A Palavra vira Igreja": o nome do site, feito de partículas de luz, se desfaz ao rolar
- * e reconstrói a Igreja Matriz ponto a ponto. A hero fica fixa enquanto a transformação acontece.
+ * e reconstrói a igreja ponto a ponto. A hero fica fixa enquanto a transformação acontece.
  */
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)

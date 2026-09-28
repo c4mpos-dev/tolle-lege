@@ -83,9 +83,9 @@ export function TourPage() {
                   <>
                     <h2 className="font-serif text-3xl font-medium">Cada detalhe diz algo</h2>
                     <p className="mt-4 leading-relaxed text-canvas/80">
-                      A arquitetura de uma igreja é uma catequese em pedra. Esta é a Igreja Matriz,
-                      e os {exteriorStops.length} pontos numerados mostram o sentido do que se vê
-                      de fora: a porta, a cruz, os sinos, até o galo no alto da torre.
+                      A arquitetura de uma igreja é uma catequese em pedra. Os{' '}
+                      {exteriorStops.length} pontos numerados mostram o sentido do que se vê de
+                      fora: a porta, a cruz, os sinos, até o galo no alto da torre.
                     </p>
                     <p className="mt-4 flex items-center gap-2 text-sm text-canvas/60">
                       <Hand className="size-4" />

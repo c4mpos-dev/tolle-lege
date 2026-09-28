@@ -69,7 +69,7 @@ export function ExploreSection() {
                   </p>
                   <h3 className="mt-4 font-serif text-3xl sm:text-4xl">Visita guiada</h3>
                   <p className="mt-3 leading-relaxed text-canvas/75">
-                    Percorra a Igreja Matriz em 3D, da escadaria ao galo no alto da torre, e depois
+                    Percorra uma igreja em 3D, da escadaria ao galo no alto da torre, e depois
                     entre para descobrir o sentido do altar, do ambão, do sacrário e da pia batismal.
                   </p>
                   <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-canvas px-5 py-2.5 text-sm font-semibold text-ink">

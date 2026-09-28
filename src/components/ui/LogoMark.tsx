@@ -2,7 +2,7 @@ import type { SVGProps } from 'react'
 
 /**
  * Marca do Tolle Lege ("toma e lê"): um livro aberto sob a cruz, dentro de um arco romano
- * como as janelas da Igreja Matriz. Usa `currentColor` para o traço e `--logo-accent` (ouro) na cruz.
+ * como as janelas da igreja do site. Usa `currentColor` para o traço e `--logo-accent` (ouro) na cruz.
  */
 export function LogoMark(props: SVGProps<SVGSVGElement>) {
   return (
