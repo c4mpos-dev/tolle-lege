@@ -30,6 +30,7 @@ Site de introdução à fé cristã católica.
 | `/trinity`          | Santíssima Trindade e heresias antigas              |
 | `/rose-novena`      | Novena das Rosas a Santa Teresinha                  |
 | `/mary`             | Maria, Mãe de Jesus                                 |
+| `/tour`             | Visita guiada: igreja 3D por fora e planta por dentro |
 
 Em produção, configure o servidor para redirecionar rotas desconhecidas para `index.html` (SPA).
 
@@ -66,7 +67,7 @@ src/
 ```
 
 Features: `home`, `trails`, `mass`, `liturgy`, `faq`, `curiosities`, `prayers`, `sacraments`,
-`liturgical-year`, `confession`, `glossary`, `trinity`, `rose-novena`, `mary` e `church` (igreja em partículas da hero).
+`liturgical-year`, `confession`, `glossary`, `trinity`, `rose-novena`, `mary`, `tour` e `church` (igreja em partículas da hero).
 
 A navegação (menu e rodapé) é gerada a partir de `navGroups` em `src/config/routes.ts`.
 
