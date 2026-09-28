@@ -328,22 +328,42 @@ type ChurchModelProps = {
 function ChurchModel({ count, materialRef, onReady }: ChurchModelProps) {
   const { scene } = useGLTF(CHURCH_MODEL_URL)
   const groupRef = useRef<Group>(null)
-  const materials = useRef<Material[]>([])
-  const [frame] = useState(() => modelFrame(scene))
 
-  useEffect(() => {
-    // Materiais transparentes enquanto a igreja "materializa"
-    const found = new Set<Material>()
-    scene.traverse((object) => {
+  /*
+   * Cópia própria do modelo, com materiais próprios. O useGLTF devolve sempre o mesmo objeto
+   * (em cache): mexer nele direto faria a próxima montagem medir um modelo já escalado e
+   * desenhar a igreja gigante. A opacidade também muda aqui, sem afetar a visita guiada.
+   */
+  const [{ model, materials, frame, cloud }] = useState(() => {
+    const clone = scene.clone(true)
+    const copies = new Map<Material, Material>()
+    clone.traverse((object) => {
       const mesh = object as Mesh
       if (!mesh.isMesh) return
-      for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
-        found.add(material)
+      const cloneMaterial = (original: Material) => {
+        if (!copies.has(original)) copies.set(original, original.clone())
+        return copies.get(original)!
       }
+      mesh.material = Array.isArray(mesh.material)
+        ? mesh.material.map(cloneMaterial)
+        : cloneMaterial(mesh.material)
     })
-    materials.current = [...found]
-    onReady(sampleChurch(scene, count))
-  }, [scene, count, onReady])
+    // A posição e a escala ficam no <group> e no <primitive>; o clone em si começa neutro.
+    clone.position.set(0, 0, 0)
+    clone.rotation.set(0, 0, 0)
+    clone.scale.set(1, 1, 1)
+    // Mede e sorteia os pontos agora, antes de o clone entrar na cena e ganhar transformações.
+    return {
+      model: clone,
+      materials: [...copies.values()],
+      frame: modelFrame(clone),
+      cloud: sampleChurch(clone, count),
+    }
+  })
+
+  useEffect(() => {
+    onReady(cloud)
+  }, [cloud, onReady])
 
   useFrame(() => {
     const group = groupRef.current
@@ -359,14 +379,14 @@ function ChurchModel({ count, materialRef, onReady }: ChurchModelProps) {
     group.rotation.set(uniforms.uTilt.value, uniforms.uRotation.value, 0)
     group.scale.setScalar(uniforms.uChurchScale.value)
 
-    applyFade(materials.current, fade)
+    applyFade(materials, fade)
   })
 
   const { center, height } = frame
   return (
     <group ref={groupRef} visible={false}>
       <primitive
-        object={scene}
+        object={model}
         scale={1 / height}
         position={[-center.x / height, -center.y / height, -center.z / height]}
       />
