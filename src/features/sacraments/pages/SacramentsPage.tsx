@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/layout/PageHeader'
+import { ParishNotice } from '@/components/ui/ParishNotice'
 import { Reveal } from '@/components/ui/Reveal'
 import { SacramentCard } from '../components/SacramentCard'
 import { sacramentGroups, sacraments } from '../data'
@@ -64,6 +65,8 @@ export function SacramentsPage() {
             </div>
           )
         })}
+
+        <ParishNotice className="mt-20" />
       </section>
     </>
   )

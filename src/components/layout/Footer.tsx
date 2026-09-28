@@ -40,7 +40,10 @@ export function Footer() {
 
       <div className="border-t border-canvas/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 text-xs text-canvas/50 sm:flex-row sm:justify-between lg:px-10">
-          <p>Este site é uma introdução e não substitui o acompanhamento da sua paróquia.</p>
+          <p>
+            Este site é uma introdução. Cada caso é único: tire suas dúvidas com a secretaria
+            paroquial e com o padre da sua paróquia.
+          </p>
           <p>
             Liturgia diária via{' '}
             <a

@@ -1,6 +1,7 @@
 import { Search } from 'lucide-react'
 import { useDeferredValue, useMemo, useState } from 'react'
 import { PageHeader } from '@/components/layout/PageHeader'
+import { ParishNotice } from '@/components/ui/ParishNotice'
 import { normalizeText } from '@/lib/text'
 import { FaqList } from '../components/FaqList'
 import { faqCategories, faqItems, type FaqCategory } from '../data'
@@ -60,11 +61,13 @@ export function FaqPage() {
             <FaqList items={results} />
           ) : (
             <p className="rounded-2xl border border-dashed border-line p-10 text-center text-ink-muted">
-              Nenhuma dúvida encontrada. Tente outra palavra ou leve sua pergunta a um padre ou
-              catequista.
+              Nenhuma dúvida encontrada. Tente outra palavra ou leve sua pergunta à secretaria da
+              sua paróquia ou ao padre.
             </p>
           )}
         </div>
+
+        <ParishNotice compact className="mt-12" />
       </section>
     </>
   )

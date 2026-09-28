@@ -1,5 +1,6 @@
 import { Lock, Plus } from 'lucide-react'
 import { PageHeader } from '@/components/layout/PageHeader'
+import { ParishNotice } from '@/components/ui/ParishNotice'
 import { Reveal } from '@/components/ui/Reveal'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { prayers } from '@/features/prayers'
@@ -122,6 +123,8 @@ export function ConfessionPage() {
             Nada nesta página é salvo ou enviado. O exame acontece só entre você e Deus.
           </p>
         </div>
+
+        <ParishNotice className="mt-16" />
       </section>
     </>
   )

@@ -2,6 +2,7 @@ import { ArrowLeft, Check, Info, Sparkles, Users } from 'lucide-react'
 import { motion } from 'motion/react'
 import { Link, useParams } from 'react-router'
 import { ButtonLink } from '@/components/ui/ButtonLink'
+import { ParishNotice } from '@/components/ui/ParishNotice'
 import { Reveal } from '@/components/ui/Reveal'
 import { NotFoundPage } from '@/components/layout/NotFoundPage'
 import { routes } from '@/config/routes'
@@ -87,6 +88,8 @@ function TrailContent({ trail }: { trail: Trail }) {
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-14 sm:py-20">
+        <ParishNotice className="mb-12" />
+
         <ol className="relative space-y-6 before:absolute before:top-4 before:bottom-4 before:left-5 before:w-px before:bg-line sm:before:left-6">
           {trail.steps.map((step, index) => {
             const completed = isDone(index)
@@ -172,6 +175,8 @@ function TrailContent({ trail }: { trail: Trail }) {
             <p className="mx-auto mt-2 max-w-lg text-canvas/70">{trail.closing}</p>
           </Reveal>
         )}
+
+        <ParishNotice compact className="mt-12" />
       </section>
 
       <section className="border-t border-line bg-surface">

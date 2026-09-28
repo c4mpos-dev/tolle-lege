@@ -160,6 +160,7 @@ export const faqItems: FaqItem[] = [
     question: 'Como encontro uma paróquia?',
     answer: [
       'Procure “paróquia” e o nome do seu bairro num buscador ou mapa, ou consulte o site da diocese da sua cidade, que costuma listar todas as paróquias com endereços e horários.',
+      'Escolha a mais próxima ou a de mais fácil acesso para você. Na secretaria paroquial, você encontra os horários de Missa e de Confissão e as informações sobre catequese e sacramentos, e pode pedir para conversar com o padre.',
     ],
   },
 ]

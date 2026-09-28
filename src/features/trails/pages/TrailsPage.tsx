@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/layout/PageHeader'
+import { ParishNotice } from '@/components/ui/ParishNotice'
 import { TrailGrid } from '../components/TrailGrid'
 
 export function TrailsPage() {
@@ -13,6 +14,7 @@ export function TrailsPage() {
       />
       <section className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-10">
         <TrailGrid />
+        <ParishNotice className="mx-auto mt-16 max-w-3xl" />
       </section>
     </>
   )
