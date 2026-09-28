@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Suspense, useEffect, useMemo, useRef, useState, type RefObject } from 'react'
 import { Box3, Color, MathUtils, type Material, Matrix4, type Mesh, MeshStandardMaterial, type Object3D, Spherical, Vector3 } from 'three'
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
-import { CHURCH_MODEL_URL } from '@/features/church'
+import { CHURCH_MODEL_URL, ENVIRONMENT_HDR_URL } from '@/features/church'
 import type { ExteriorStop } from '../data'
 
 /** Altura da igreja na cena (unidades 3D). */
@@ -50,7 +50,7 @@ export function ExteriorScene({ stops, selected, onSelect }: ExteriorSceneProps)
     <div className="relative size-full touch-none">
       <Canvas camera={{ position: [5, 3, 11], fov: 40 }} dpr={[1, 2]}>
         <Suspense fallback={null}>
-          <Environment preset="city" environmentIntensity={0.8} />
+          <Environment files={ENVIRONMENT_HDR_URL} environmentIntensity={0.8} />
           <directionalLight position={[-6, 9, 7]} intensity={1.6} color="#ffe1ad" />
           <TourModel stops={stops} selected={selected} markerRefs={markerRefs} onReady={() => setReady(true)} />
         </Suspense>

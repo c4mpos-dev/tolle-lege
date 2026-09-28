@@ -14,7 +14,7 @@ import {
   Vector2,
   Vector3,
 } from 'three'
-import { CHURCH_MODEL_URL } from '../constants'
+import { CHURCH_MODEL_URL, ENVIRONMENT_HDR_URL } from '../constants'
 import { modelFrame, sampleChurch, type PointCloud } from '../particles/sampleChurch'
 import { sampleText } from '../particles/sampleText'
 import { fragmentShader, vertexShader } from '../particles/shaders'
@@ -273,7 +273,7 @@ function ParticleField({ morph, reducedMotion }: ParticleChurchProps) {
         />
       </points>
       <Suspense fallback={null}>
-        <Environment preset="city" environmentIntensity={0.8} />
+        <Environment files={ENVIRONMENT_HDR_URL} environmentIntensity={0.8} />
         {/* Luz quente, como sol da manhã entrando pela janela */}
         <directionalLight position={[-6, 9, 7]} intensity={1.6} color="#ffe1ad" />
         <ChurchModel count={count} materialRef={materialRef} onReady={onChurchReady} />
