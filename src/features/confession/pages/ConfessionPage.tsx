@@ -25,10 +25,11 @@ export function ConfessionPage() {
           <div>
             <h2 className="font-serif text-2xl sm:text-3xl">Não tenha medo</h2>
             <p className="mt-3 leading-relaxed text-canvas/80">
-              O padre é obrigado a guardar <strong className="text-canvas">sigilo absoluto</strong>{' '}
-              sobre tudo o que ouve na Confissão, sem nenhuma exceção, nem mesmo diante da polícia
-              ou de um tribunal. E ele não está ali para julgar: está ali em nome de Jesus, para
-              perdoar.
+              O padre guarda <strong className="text-canvas">sigilo absoluto</strong> sobre tudo o
+              que ouve na Confissão: o que você disser fica entre você, ele e Deus. E ele não está
+              ali para julgar, e sim em nome de Jesus, para perdoar. Ele também pode{' '}
+              <strong className="text-canvas">aconselhar você</strong>: ajudar a entender o que está
+              vivendo e a encontrar um caminho para recomeçar.
             </p>
           </div>
         </Reveal>
@@ -39,11 +40,18 @@ export function ConfessionPage() {
             <SectionHeader eyebrow="Passo a passo" title="Antes, durante e depois" />
           </Reveal>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          {/* Uma faixa por fase: o título ao lado e os passos em colunas, sem sobrar espaço */}
+          <div className="mt-10 space-y-6">
             {confessionPhases.map((phase, phaseIndex) => (
-              <Reveal key={phase.id} delay={phaseIndex * 0.08} className="rounded-3xl border border-line bg-canvas p-6 sm:p-7">
-                <p className="font-serif text-3xl text-primary-strong">{phase.title}</p>
-                <ol className="mt-6 space-y-6">
+              <Reveal
+                key={phase.id}
+                delay={phaseIndex * 0.08}
+                className="grid gap-6 rounded-3xl border border-line bg-canvas p-6 sm:p-8 lg:grid-cols-[10rem_1fr] lg:gap-10"
+              >
+                <p className="font-serif text-3xl text-primary-strong lg:border-r lg:border-line lg:pr-6">
+                  {phase.title}
+                </p>
+                <ol className="grid gap-x-8 gap-y-6 sm:grid-cols-2 xl:grid-cols-3">
                   {phase.steps.map((step, index) => (
                     <li key={step.title} className="flex gap-4">
                       <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary-strong">
