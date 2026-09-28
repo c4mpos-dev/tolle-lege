@@ -10,6 +10,7 @@ import { ClosingCta } from '../components/ClosingCta'
 import { ExploreSection } from '../components/ExploreSection'
 import { Hero } from '../components/Hero'
 import { MassPreview } from '../components/MassPreview'
+import { SaintsQuote } from '../components/SaintsQuote'
 
 const featuredFaqIds = ['mass-without-baptism', 'communion-non-catholic', 'worship-mary', 'how-to-confess']
 const featuredFaq = faqItems.filter((item) => featuredFaqIds.includes(item.id))
@@ -96,6 +97,8 @@ export function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      <SaintsQuote />
 
       <ClosingCta />
     </>
