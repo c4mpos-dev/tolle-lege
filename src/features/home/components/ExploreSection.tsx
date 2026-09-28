@@ -1,4 +1,4 @@
-import { ArrowUpRight, BookA, Droplets, HandHeart, Sparkles } from 'lucide-react'
+import { ArrowUpRight, BookA, Droplets, Footprints, HandHeart, Sparkles } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { Reveal } from '@/components/ui/Reveal'
@@ -52,6 +52,50 @@ export function ExploreSection() {
               <p className="mt-2 text-sm text-ink-muted">
                 As orações essenciais e um terço guiado, conta por conta.
               </p>
+            </Tile>
+          </Reveal>
+
+          {/* Visita guiada: destaque em toda a largura */}
+          <Reveal className="md:col-span-2 lg:col-span-3">
+            <Tile
+              to={routes.tour}
+              className="bg-[radial-gradient(ellipse_at_80%_50%,rgb(176_141_87/0.35),transparent_60%)] bg-ink text-canvas"
+            >
+              <div className="flex h-full flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+                <div className="max-w-xl">
+                  <p className="inline-flex items-center gap-1.5 rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">
+                    <Sparkles className="size-3.5" />
+                    Novo
+                  </p>
+                  <h3 className="mt-4 font-serif text-3xl sm:text-4xl">Visita guiada</h3>
+                  <p className="mt-3 leading-relaxed text-canvas/75">
+                    Percorra a Igreja Matriz em 3D, da escadaria ao galo no alto da torre, e depois
+                    entre para descobrir o sentido do altar, do ambão, do sacrário e da pia batismal.
+                  </p>
+                  <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-canvas px-5 py-2.5 text-sm font-semibold text-ink">
+                    <Footprints className="size-4" />
+                    Começar a visita
+                  </span>
+                </div>
+
+                {/* Pontos numerados, como na visita */}
+                <div aria-hidden className="relative mx-auto h-36 w-44 shrink-0 sm:mx-0">
+                  <div className="absolute inset-x-6 top-4 bottom-0 rounded-t-full border-2 border-canvas/25" />
+                  {[
+                    ['1', 'left-1/2 bottom-2 -translate-x-1/2'],
+                    ['2', 'left-4 top-12'],
+                    ['3', 'left-1/2 top-0 -translate-x-1/2'],
+                    ['4', 'right-3 top-16'],
+                  ].map(([n, position]) => (
+                    <span
+                      key={n}
+                      className={`absolute flex size-9 items-center justify-center rounded-full border-2 border-ink bg-primary-strong font-serif text-sm text-canvas shadow-lg ${position}`}
+                    >
+                      {n}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </Tile>
           </Reveal>
 
