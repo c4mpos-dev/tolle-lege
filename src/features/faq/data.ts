@@ -53,6 +53,7 @@ export const faqItems: FaqItem[] = [
       'Não. A adoração é devida somente a Deus. Maria é venerada, isto é, honrada de modo especial por ser a Mãe de Jesus e o maior exemplo de fé.',
       'Quando um católico reza a Ave-Maria, pede que ela interceda, que reze por nós, como pedimos a um amigo.',
     ],
+    link: { label: 'Maria, Mãe de Jesus', to: routes.mary },
   },
   {
     id: 'why-confess-to-priest',

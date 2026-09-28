@@ -335,7 +335,7 @@ export const trails: Trail[] = [
           text: 'Doravante todas as gerações me chamarão bem-aventurada.',
         },
         practice: 'Leia o Magnificat, o cântico de Maria, em Lucas 1,46-55.',
-        link: { label: 'Os católicos adoram Maria?', to: `${routes.faq}#worship-mary` },
+        link: { label: 'Maria, Mãe de Jesus', to: routes.mary },
       },
       {
         title: 'O Papa e a Igreja',

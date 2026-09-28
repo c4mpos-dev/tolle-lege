@@ -13,6 +13,7 @@ export const glossary: GlossaryTerm[] = [
   { term: 'Ambão', definition: 'Estante de onde são proclamadas as leituras da Bíblia na Missa. É a “mesa da Palavra”.' },
   { term: 'Amém', definition: 'Palavra hebraica que significa “é verdade”, “assim seja”. Expressa adesão ao que foi dito.' },
   { term: 'Água benta', definition: 'Água abençoada pelo sacerdote. Ao entrar na igreja, fazemos o sinal da cruz com ela, lembrando o Batismo.' },
+  { term: 'Assunção', definition: 'Dogma segundo o qual Maria, ao fim da vida terrena, foi levada ao céu de corpo e alma. Proclamado em 1950 e celebrado em 15 de agosto.', link: { label: 'Os dogmas marianos', to: `${routes.mary}#dogmas` } },
   { term: 'Batismo', definition: 'Primeiro sacramento: liberta do pecado e torna a pessoa filha de Deus e membro da Igreja.', link: { label: 'Sacramentos', to: `${routes.sacraments}#baptism` } },
   { term: 'Bispo', definition: 'Sucessor dos apóstolos, responsável por uma diocese. Recebeu a plenitude do sacramento da Ordem.' },
   { term: 'Cálice', definition: 'Taça onde o vinho é consagrado e se torna o Sangue de Cristo.' },
@@ -33,6 +34,7 @@ export const glossary: GlossaryTerm[] = [
   { term: 'Heresia', definition: 'Negação obstinada, por parte de um batizado, de uma verdade que deve ser crida com fé divina e católica, ou a dúvida obstinada sobre ela (Código de Direito Canônico, cân. 751). Ter dúvidas sinceras ou dificuldade para entender não é heresia.', link: { label: 'Heresias sobre a Trindade', to: `${routes.trinity}#heresias` } },
   { term: 'Homilia', definition: 'Pregação do sacerdote ou diácono na Missa, que explica as leituras e as aproxima da vida.' },
   { term: 'Hóstia', definition: 'Pão sem fermento usado na Missa. Após a consagração, é o Corpo de Cristo.' },
+  { term: 'Imaculada Conceição', definition: 'Dogma segundo o qual Maria foi preservada do pecado original desde a sua concepção. Não se refere à concepção de Jesus. Proclamado em 1854 e celebrado em 8 de dezembro.', link: { label: 'Os dogmas marianos', to: `${routes.mary}#dogmas` } },
   { term: 'Liturgia', definition: 'A oração pública e oficial da Igreja: a Missa, os sacramentos e a Liturgia das Horas.', link: { label: 'Liturgia diária', to: routes.liturgy } },
   { term: 'Magistério', definition: 'A missão de ensinar confiada ao Papa e aos bispos em comunhão com ele.' },
   { term: 'Missa', definition: 'Celebração da Eucaristia, em que se torna presente o sacrifício de Cristo.', link: { label: 'Como funciona a Missa', to: routes.mass } },
@@ -45,5 +47,6 @@ export const glossary: GlossaryTerm[] = [
   { term: 'Sacramento', definition: 'Sinal visível e eficaz da graça, instituído por Cristo. São sete.', link: { label: 'Os sete sacramentos', to: routes.sacraments } },
   { term: 'Santíssima Trindade', definition: 'O mistério central da fé: um só Deus em três Pessoas, Pai, Filho e Espírito Santo.', link: { label: 'Entenda a Trindade', to: routes.trinity } },
   { term: 'Terço', definition: 'Oração que medita a vida de Jesus e de Maria com Pai-Nossos e Ave-Marias. Quatro terços formam o Rosário.', link: { label: 'Terço guiado', to: `${routes.prayers}#terco` } },
+  { term: 'Theotókos', definition: 'Palavra grega para “Mãe de Deus”, título de Maria definido no Concílio de Éfeso, em 431.', link: { label: 'Maria, Mãe de Jesus', to: routes.mary } },
   { term: 'Vigília', definition: 'Celebração na noite anterior a uma grande festa. A mais importante é a Vigília Pascal.' },
 ]
