@@ -68,6 +68,59 @@ function drawLogo(ctx: CanvasRenderingContext2D, x: number, y: number, size: num
   ctx.restore()
 }
 
+const MARGIN = 80
+const PAD = 88
+/** Menor tamanho de letra do trecho que ainda se lê bem no celular (em uma imagem de 1080 px). */
+const MIN_QUOTE_SIZE = 40
+/** Altura fixa do cartão: respiros, cabeçalho, referência, divisor e marca. */
+const FIXED_H = PAD * 2 + 26 + 56 + 56 + 34 + 88 + 56
+
+export type ShareCardLayout = {
+  size: number
+  quoteLines: string[]
+  titleLines: string[]
+  cardH: number
+  /** O trecho cabe com letra legível? */
+  fits: boolean
+  /** Quanto do espaço disponível o trecho ocupa na menor letra legível (0 a 1+). */
+  usage: number
+}
+
+/** Calcula o layout, reduzindo a letra do trecho até caber (sem passar do mínimo legível). */
+function computeLayout(ctx: CanvasRenderingContext2D, content: ShareCardContent, W: number, H: number): ShareCardLayout {
+  const textW = W - MARGIN * 2 - PAD * 2
+  const maxCardH = H - MARGIN * 2
+
+  ctx.font = `400 26px ${SANS}`
+  const titleLines = content.title ? wrap(ctx, content.title, textW).slice(0, 2) : []
+  const heightAt = (size: number) => {
+    ctx.font = `italic 400 ${size}px ${SERIF}`
+    const lines = wrap(ctx, content.quote, textW)
+    return { lines, cardH: FIXED_H + lines.length * size * 1.34 + titleLines.length * 36 }
+  }
+
+  let size = W === H ? 58 : 70
+  let result = heightAt(size)
+  while (result.cardH > maxCardH && size > MIN_QUOTE_SIZE) {
+    size -= 2
+    result = heightAt(size)
+  }
+
+  const atMinimum = size === MIN_QUOTE_SIZE ? result : heightAt(MIN_QUOTE_SIZE)
+  const usage = (atMinimum.cardH - FIXED_H) / (maxCardH - FIXED_H)
+
+  return { size, quoteLines: result.lines, titleLines, cardH: result.cardH, fits: result.cardH <= maxCardH, usage }
+}
+
+let measureCtx: CanvasRenderingContext2D | null = null
+
+/** Mede um trecho sem desenhar (para avisar quando não cabe no formato). */
+export function measureShareCard(content: ShareCardContent, width: number, height: number) {
+  measureCtx ??= document.createElement('canvas').getContext('2d')
+  if (!measureCtx) return null
+  return computeLayout(measureCtx, content, width, height)
+}
+
 /** Desenha a imagem de compartilhamento: fundo, cartão, trecho, referência e marca. */
 export function renderShareCard(canvas: HTMLCanvasElement, content: ShareCardContent, options: ShareCardOptions) {
   const { width: W, height: H, radius, theme } = options
@@ -76,8 +129,8 @@ export function renderShareCard(canvas: HTMLCanvasElement, content: ShareCardCon
   const ctx = canvas.getContext('2d')
   if (!ctx) return
 
-  const margin = 80
-  const pad = 88
+  const margin = MARGIN
+  const pad = PAD
   const cardW = W - margin * 2
   const textW = cardW - pad * 2
 
@@ -90,26 +143,9 @@ export function renderShareCard(canvas: HTMLCanvasElement, content: ShareCardCon
   ctx.fillStyle = glow
   ctx.fillRect(0, 0, W, H)
 
-  // Medidas do conteúdo, reduzindo a letra do trecho até caber
   // Sem aspas externas: o trecho muitas vezes já tem as suas, e as aspas grandes decoram o cartão.
-  const quote = content.quote
-  const maxCardH = H - margin * 2
-  const fixedH = pad * 2 + 26 + 56 + 56 + 34 + 88 + 56
-  let size = W === H ? 58 : 70
-  let quoteLines: string[] = []
-  let titleLines: string[] = []
-
-  for (; size >= 30; size -= 2) {
-    ctx.font = `italic 400 ${size}px ${SERIF}`
-    quoteLines = wrap(ctx, quote, textW)
-    ctx.font = `400 26px ${SANS}`
-    titleLines = content.title ? wrap(ctx, content.title, textW).slice(0, 2) : []
-    const total = fixedH + quoteLines.length * size * 1.34 + titleLines.length * 36
-    if (total <= maxCardH) break
-  }
-
+  const { size, quoteLines, titleLines, cardH } = computeLayout(ctx, content, W, H)
   const lineH = size * 1.34
-  const cardH = fixedH + quoteLines.length * lineH + titleLines.length * 36
   const cardX = margin
   const cardY = (H - cardH) / 2
 
