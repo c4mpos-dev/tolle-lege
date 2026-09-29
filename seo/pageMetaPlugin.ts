@@ -22,6 +22,9 @@ function replaceAttr(html: string, tag: RegExp, value: string) {
  * e URL próprios. A Vercel serve `/confession` a partir de `confession/index.html`, e os robôs das
  * redes veem a prévia da página certa. O app React continua o mesmo em todas.
  *
+ * Também gera o `sitemap.xml` (a lista de páginas que o Google usa para achar o site todo) e o
+ * `robots.txt` (que libera a leitura e aponta o sitemap), com as mesmas páginas.
+ *
  * (Não usamos `cleanUrls`: ele redirecionaria qualquer `.html`, inclusive o arquivo de
  * verificação do Google Search Console, que precisa responder direto, sem redirecionamento.)
  */
@@ -52,6 +55,17 @@ export function pageMetaPlugin(siteUrl: string): Plugin {
         await mkdir(dirname(file), { recursive: true })
         await writeFile(file, html)
       }
+
+      const urls = ['/', ...pages.map((page) => page.path)]
+      const sitemap = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ...urls.map((path) => `  <url><loc>${escapeHtml(`${siteUrl}${path}`)}</loc></url>`),
+        '</urlset>',
+        '',
+      ].join('\n')
+      await writeFile(join(outDir, 'sitemap.xml'), sitemap)
+      await writeFile(join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`)
     },
   }
 }

@@ -2,6 +2,7 @@
  * Título e descrição de cada página para a prévia do link (WhatsApp, Instagram, Facebook…).
  * Os robôs dessas redes não rodam JavaScript: no build, cada página ganha um HTML próprio com
  * estas tags (ver `pageMetaPlugin`). A página inicial usa as tags do próprio index.html.
+ * A mesma lista gera o sitemap.xml enviado ao Google.
  *
  * Os caminhos seguem `src/config/routes.ts`. Ao criar uma página, acrescente-a aqui também.
  */
