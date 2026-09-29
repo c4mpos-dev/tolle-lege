@@ -4,7 +4,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import { routes } from '@/config/routes'
 import { CuriosityGrid, curiosities } from '@/features/curiosities'
 import { FaqList, faqItems } from '@/features/faq'
-import { LiturgyTodayCard } from '@/features/liturgy'
+import { LiturgyTodayCard, SaintOfTheDayCard } from '@/features/liturgy'
 import { TrailGrid } from '@/features/trails'
 import { ClosingCta } from '../components/ClosingCta'
 import { ExploreSection } from '../components/ExploreSection'
@@ -51,6 +51,7 @@ export function HomePage() {
               title="A mesma Palavra, no mundo inteiro"
               description="Todos os dias, em cada Missa do mundo, a Igreja lê as mesmas passagens da Bíblia. Leia as de hoje e reze junto."
             />
+            <SaintOfTheDayCard className="mt-10 max-w-xl" />
           </Reveal>
           <Reveal delay={0.1}>
             <LiturgyTodayCard />
