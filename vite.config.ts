@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
+import { pageMetaPlugin } from './seo/pageMetaPlugin.ts'
 
 const DEFAULT_SITE_URL = 'https://tolle-et-lege.vercel.app'
 
@@ -13,10 +14,11 @@ export default defineConfig(({ mode }) => {
    * A barra final é removida, porque o index.html já coloca a sua.
    */
   const { VITE_SITE_URL } = loadEnv(mode, process.cwd(), 'VITE_')
-  process.env.VITE_SITE_URL = (VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, '')
+  const siteUrl = (VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, '')
+  process.env.VITE_SITE_URL = siteUrl
 
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), pageMetaPlugin(siteUrl)],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
