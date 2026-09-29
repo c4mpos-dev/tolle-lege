@@ -18,9 +18,12 @@ function replaceAttr(html: string, tag: RegExp, value: string) {
 }
 
 /**
- * Depois do build, gera `dist/<página>.html` a partir do index.html, com título, descrição e
- * URL próprios. Com `cleanUrls` na Vercel, `/confession` serve `confession.html`, e os robôs
- * das redes veem a prévia da página certa. O app React continua o mesmo em todas.
+ * Depois do build, gera `dist/<página>/index.html` a partir do index.html, com título, descrição
+ * e URL próprios. A Vercel serve `/confession` a partir de `confession/index.html`, e os robôs das
+ * redes veem a prévia da página certa. O app React continua o mesmo em todas.
+ *
+ * (Não usamos `cleanUrls`: ele redirecionaria qualquer `.html`, inclusive o arquivo de
+ * verificação do Google Search Console, que precisa responder direto, sem redirecionamento.)
  */
 export function pageMetaPlugin(siteUrl: string): Plugin {
   let config: ResolvedConfig
@@ -45,7 +48,7 @@ export function pageMetaPlugin(siteUrl: string): Plugin {
         html = replaceAttr(html, /(<meta\s+property="og:url"\s+content=")[^"]*(")/, url)
         html = replaceAttr(html, /(<link\s+rel="canonical"\s+href=")[^"]*(")/, url)
 
-        const file = join(outDir, `${page.path.slice(1)}.html`)
+        const file = join(outDir, page.path.slice(1), 'index.html')
         await mkdir(dirname(file), { recursive: true })
         await writeFile(file, html)
       }
