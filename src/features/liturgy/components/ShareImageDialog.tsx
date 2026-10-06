@@ -2,6 +2,7 @@ import { Download, Share2, X } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { routes } from '@/config/routes'
 import { canvasToFile, loadShareFonts, measureShareCard, renderShareCard } from '../share/renderShareCard'
 import { segmentsOf } from '../share/segments'
 import {
@@ -38,6 +39,7 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
   const [themeId, setThemeId] = useState<ShareThemeId>(themeForLiturgicalColor[color])
   const [radiusId, setRadiusId] = useState<ShareRadiusId>('soft')
   const [formatId, setFormatId] = useState<ShareFormatId>('story')
+  const [withLink, setWithLink] = useState(false)
   const [fontsReady, setFontsReady] = useState(false)
   const [busy, setBusy] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -52,8 +54,9 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
       quote: quote || '…',
       reference: item.referencia,
       title: 'titulo' in item ? item.titulo : 'Salmo responsorial',
+      link: withLink ? `${window.location.host}${routes.liturgy}` : undefined,
     }),
-    [date, quote, item],
+    [date, quote, item, withLink],
   )
 
   // Em vez de um limite fixo de caracteres, verifica se o trecho cabe com letra legível em cada formato.
@@ -232,6 +235,15 @@ export function ShareImageDialog({ item, date, color, onClose }: ShareImageDialo
                 options={shareFormats.map((f) => ({ id: f.id, name: f.name }))}
                 value={formatId}
                 onChange={(id) => setFormatId(id as ShareFormatId)}
+              />
+              <OptionGroup
+                label="Link do site"
+                options={[
+                  { id: 'off', name: 'Sem link' },
+                  { id: 'on', name: 'Com link' },
+                ]}
+                value={withLink ? 'on' : 'off'}
+                onChange={(id) => setWithLink(id === 'on')}
               />
             </div>
           </div>

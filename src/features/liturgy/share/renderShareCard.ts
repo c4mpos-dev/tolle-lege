@@ -5,6 +5,8 @@ export type ShareCardContent = {
   quote: string
   reference: string
   title?: string
+  /** Endereço do site, mostrado ao lado da marca (ex.: "tolle-et-lege.vercel.app/liturgy"). */
+  link?: string
 }
 
 export type ShareCardOptions = {
@@ -214,6 +216,23 @@ export function renderShareCard(canvas: HTMLCanvasElement, content: ShareCardCon
   ctx.fillStyle = theme.text
   ctx.font = `500 38px ${SERIF}`
   ctx.fillText('Tolle Lege', x + 68, y + 4)
+
+  // Link do site, alinhado à direita na linha da marca (a letra diminui se faltar espaço)
+  if (content.link) {
+    const room = textW - 68 - ctx.measureText('Tolle Lege').width - 32
+    let linkSize = 26
+    ctx.font = `500 ${linkSize}px ${SANS}`
+    while (ctx.measureText(content.link).width > room && linkSize > 18) {
+      linkSize -= 1
+      ctx.font = `500 ${linkSize}px ${SANS}`
+    }
+    ctx.fillStyle = theme.muted
+    ctx.textAlign = 'right'
+    ctx.textBaseline = 'middle'
+    ctx.fillText(content.link, x + textW, y + 22)
+    ctx.textAlign = 'left'
+    ctx.textBaseline = 'top'
+  }
 }
 
 export function canvasToFile(canvas: HTMLCanvasElement, name: string) {
