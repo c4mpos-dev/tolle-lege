@@ -25,3 +25,11 @@ export function formatLongDate(date: Date) {
   const text = longDate.format(date)
   return text.charAt(0).toUpperCase() + text.slice(1)
 }
+
+const dayMonth = new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long' })
+
+/** De "28/09/2026" (formato da API) para "28 de setembro". */
+export function formatDayMonth(apiDate: string) {
+  const [day, month, year] = apiDate.split('/').map(Number)
+  return dayMonth.format(new Date(year, month - 1, day))
+}

@@ -1,8 +1,9 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, ImageDown } from 'lucide-react'
 import { useState } from 'react'
 import { CrossPattee } from '@/components/ui/CrossPattee'
 import { useLiturgy } from '../hooks/useLiturgy'
-import { parseCelebration, vaticanSaintUrl } from '../utils/celebration'
+import { celebrationLabel, parseCelebration, vaticanSaintUrl } from '../utils/celebration'
+import { SaintShareDialog } from './SaintShareDialog'
 
 /**
  * Santo do dia: o nome da celebração vem da API da liturgia (calendário litúrgico) e a história
@@ -12,6 +13,7 @@ export function SaintOfTheDayCard({ className = '' }: { className?: string }) {
   const [today] = useState(() => new Date())
   const { data, isPending } = useLiturgy(today)
   const celebration = data ? parseCelebration(data.liturgia) : null
+  const [sharing, setSharing] = useState(false)
 
   return (
     <article
@@ -26,7 +28,7 @@ export function SaintOfTheDayCard({ className = '' }: { className?: string }) {
       </span>
 
       <div className="min-w-0 flex-1">
-        <p className="rubric text-xs text-cardinal">Santo do dia</p>
+        <p className="rubric text-xs text-cardinal">{celebration ? celebrationLabel(celebration) : 'Santo do dia'}</p>
 
         {isPending ? (
           <div className="mt-3 h-6 w-4/5 animate-pulse rounded bg-line" role="status" aria-label="Carregando" />
@@ -58,7 +60,27 @@ export function SaintOfTheDayCard({ className = '' }: { className?: string }) {
           <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </a>
         <p className="mt-1 text-xs text-ink-muted">No Vatican News, o portal oficial da Santa Sé</p>
+
+        {data && celebration && (
+          <button
+            type="button"
+            onClick={() => setSharing(true)}
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-ink"
+          >
+            <ImageDown className="size-4" />
+            Compartilhar imagem
+          </button>
+        )}
       </div>
+
+      {sharing && data && celebration && (
+        <SaintShareDialog
+          celebration={celebration}
+          date={data.data}
+          color={data.cor}
+          onClose={() => setSharing(false)}
+        />
+      )}
     </article>
   )
 }

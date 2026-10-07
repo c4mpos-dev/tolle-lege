@@ -49,3 +49,11 @@ export const shareRadii = [
 ] as const
 
 export type ShareRadiusId = (typeof shareRadii)[number]['id']
+
+/** As opções dos editores de imagem (bordas, formato e link do site), prontas para os botões. */
+export const radiusOptions = shareRadii.map((r) => ({ id: r.id, name: r.name }))
+export const formatOptions = shareFormats.map((f) => ({ id: f.id, name: f.name }))
+export const linkOptions = [
+  { id: 'off', name: 'Sem link' },
+  { id: 'on', name: 'Com link' },
+]
